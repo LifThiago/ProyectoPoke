@@ -7,6 +7,9 @@ const router = Router();
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
+router.get('/', (req, res) => {
+    res.status(200).json({200: 'funciona'})
+})
 
 
 module.exports = router;
