@@ -3,7 +3,7 @@ const { Router } = require('express');
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const {Pokemon, Type } = require('../db.js');
-const { getPokemonsDb, getPokemonsApi, getAllPokemons, getPokemonById } = require('./controllers.js');
+const { getPokemonsDb, getPokemonsApi, getAllPokemons, getPokemonById, getPokemonByName } = require('./controllers.js');
 
 
 const router = Router();
@@ -31,11 +31,31 @@ router.get('/pokeapi', async (req, res, next) => { // Ruta para los pokemon de A
 });
 
 router.get('/pokemons', async (req, res) => { //Ruta para todos los pokemon
+    const { name } = req.query
+        if (name) {
+            try {
+                let pokemon = await getPokemonByName(name)
+                res.status(200).json(pokemon)
+            } catch (error) {
+                res.send(error)
+            }
+        } else {
+            try {
+                let allPokes = await getAllPokemons()
+                res.status(200).json(allPokes)
+            } catch (error) {
+                res.send(error)
+            }
+        }
+})
+
+router.get('/pokemons/:id', async (req, res) => {
+    const { id } = req.params
     try {
-        let allPokes = await getAllPokemons()
-        res.status(200).send(allPokes)
+        let pokemon = await getPokemonById(id)
+        res.status(200).send(pokemon)
     } catch (error) {
-        res.send(error)
+        res.status(404).send('No se encontro un pokemon con ese Id')
     }
 })
 
@@ -50,15 +70,6 @@ router.post('/pokemons', async (req, res) => {
     }
 })
 
-router.get('/:id', async (req, res) => {
-    const { id } = req.params
-    try {
-        let pokemon = await getPokemonById(id)
-        res.status(200).send(pokemon)
-    } catch (error) {
-        res.status(404).send('No se encontro un pokemon con ese Id')
-    }
-})
 
 
 module.exports = router;

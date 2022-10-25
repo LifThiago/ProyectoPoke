@@ -44,28 +44,53 @@ async function getAllPokemons() {
     return allPokes
 }
 
-async function getPokemonById(id) {
-    const pokemonUrl = await axios(`https://pokeapi.co/api/v2/pokemon/${id}`)
-    // console.log(pokemonUrl)
-    // console.log(pokemonUrl.data)
-    let poke = {
-            id: pokemonUrl.data.id,
-            name: pokemonUrl.data.name,
-            height: pokemonUrl.data.height,
-            weight: pokemonUrl.data.weight,
-            hp: pokemonUrl.data.stats[0].base_stat,
-            attack: pokemonUrl.data.stats[1].base_stat,
-            defense: pokemonUrl.data.stats[2].base_stat,
-            speed: pokemonUrl.data.stats[5].base_stat,
-            img: pokemonUrl.data.sprites.front_default,
+async function getPokemonById(value) {
+    if(value.length > 15) {
+        let poke = Pokemon.findOne({
+            where: {
+                id: value
+            }
+        })
+        return poke
+    } else {
+    return getPokemonByNameApi(value)
+}
+}
+
+async function getPokemonByNameApi(value) {
+    try {
+        const pokemonUrl = await axios(`https://pokeapi.co/api/v2/pokemon/${value}`)
+        let pokemon = {
+                id: pokemonUrl.data.id,
+                name: pokemonUrl.data.name,
+                height: pokemonUrl.data.height,
+                weight: pokemonUrl.data.weight,
+                hp: pokemonUrl.data.stats[0].base_stat,
+                attack: pokemonUrl.data.stats[1].base_stat,
+                defense: pokemonUrl.data.stats[2].base_stat,
+                speed: pokemonUrl.data.stats[5].base_stat,
+                img: pokemonUrl.data.sprites.front_default,
+        }
+        return pokemon
+    } catch (error) {
+        return error
     }
-    // console.log(poke)
-    return poke
+}
+
+async function getPokemonByName(name) {
+    let pokemon = await Pokemon.findOne({
+        where: {
+            name: name
+        }
+    });
+    if(!pokemon) return getPokemonById(name)
+    return pokemon
 }
 
 module.exports = {
     getPokemonsDb,
     getPokemonsApi,
     getAllPokemons,
-    getPokemonById
+    getPokemonById,
+    getPokemonByName
 }
