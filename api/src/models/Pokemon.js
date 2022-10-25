@@ -20,27 +20,33 @@ module.exports = (sequelize) => {
     },
 
     life: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      defaultValue: 35
     },
 
     attack: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      defaultValue: 55
     },
 
     defense: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      defaultValue: 40
     },
 
     speed: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      defaultValue: 90
     },
 
     height: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      defaultValue: 4
     },
 
     weight: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      defaultValue: 60
     },
 
     img: {
@@ -54,6 +60,10 @@ module.exports = (sequelize) => {
     createdDB: {
       type: DataTypes.BOOLEAN,
       defaultValue: true
-    }
-  });
+    },
+  },
+  {
+    timestamps: false
+  }
+  );
 };
