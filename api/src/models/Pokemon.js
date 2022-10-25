@@ -13,13 +13,18 @@ module.exports = (sequelize) => {
       allowNull: false
     },
 
+    idPoke: {
+      type: DataTypes.INTEGER,
+      unique: true
+    },
+
     name: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
     },
 
-    life: {
+    hp: {
       type: DataTypes.INTEGER,
       defaultValue: 35
     },

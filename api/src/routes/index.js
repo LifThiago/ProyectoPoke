@@ -1,8 +1,9 @@
+const { default: axios } = require('axios');
 const { Router } = require('express');
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const {Pokemon, Type } = require('../db.js');
-const { getPokemonsDb, getPokemonsApi, getAllPokemons } = require('./controllers.js');
+const { getPokemonsDb, getPokemonsApi, getAllPokemons, getPokemonById } = require('./controllers.js');
 
 
 const router = Router();
@@ -46,6 +47,16 @@ router.post('/pokemons', async (req, res) => {
         res.status(200).send(pokemon)
     } catch (error) {
         res.send(error)
+    }
+})
+
+router.get('/:id', async (req, res) => {
+    const { id } = req.params
+    try {
+        let pokemon = await getPokemonById(id)
+        res.status(200).send(pokemon)
+    } catch (error) {
+        res.status(404).send('No se encontro un pokemon con ese Id')
     }
 })
 
