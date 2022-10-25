@@ -1,14 +1,14 @@
 const {Pokemon, Type } = require('../db.js')
 
 async function getPokemonsDb() {
-    let pokemons = await Pokemon.findAll({
+    let pokemonsDb = await Pokemon.findAll({
         include: {
             model: Type,
             attributes: ['id', 'name']
         }
     });
-    return pokemons
-}
+    return pokemonsDb
+};
 
 module.exports = {
     getPokemonsDb

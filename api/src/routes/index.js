@@ -12,11 +12,22 @@ const router = Router();
 router.get('/', async (req, res, next) => {
     try {
         let pokemonsDb = await getPokemonsDb();
-        res.status(200).json(pokemonsDb())
+        res.status(200).json(pokemonsDb)
     } catch (error) {
         res.status(404).send(error)
     }
 });
+
+router.post('/', async (req, res) => {
+    const { name } = req.body
+    if(!name) return res.status(400).send('Faltan datos')
+    try {
+        let pokemon = await Pokemon.create(req.body)
+        res.status(200).send(pokemon)
+    } catch (error) {
+        res.send(error)
+    }
+})
 
 
 module.exports = router;
