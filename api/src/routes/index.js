@@ -3,7 +3,7 @@ const { Router } = require('express');
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const {Pokemon, Type } = require('../db.js');
-const { getPokemonsDb, getPokemonsApi, getAllPokemons, getPokemonById, getPokemonByName } = require('./controllers.js');
+const { getPokemonsDb, getPokemonsApi, getAllPokemons, getPokemonById, getPokemonByName, getTypes } = require('./controllers.js');
 
 
 const router = Router();
@@ -55,7 +55,7 @@ router.get('/pokemons/:id', async (req, res) => {
         let pokemon = await getPokemonById(id)
         res.status(200).send(pokemon)
     } catch (error) {
-        res.status(404).send('No se encontro un pokemon con ese Id')
+        res.status(404).send(error)
     }
 })
 
@@ -68,6 +68,11 @@ router.post('/pokemons', async (req, res) => {
     } catch (error) {
         res.send(error)
     }
+})
+
+router.get('/types', async (req, res) => {
+    let result = await getTypes()
+    res.send(result)
 })
 
 

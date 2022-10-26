@@ -56,10 +56,15 @@ module.exports = (sequelize) => {
 
     img: {
       type: DataTypes.TEXT,
-      defaultValue: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/2052px-Pok%C3%A9_Ball_icon.svg.png',
+      // defaultValue: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/2052px-Pok%C3%A9_Ball_icon.svg.png',
       validate: {
         isUrl: true,
       }
+    },
+
+    type: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      defaultValue: ['normal']
     },
 
     createdDB: {

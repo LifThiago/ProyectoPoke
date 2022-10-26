@@ -3,10 +3,13 @@ const axios = require("axios");
 
 async function getPokemonsDb() {
     let pokemonsDb = await Pokemon.findAll({
-        include: {
-            model: Type,
-            attributes: ['id', 'name']
-        }
+        // include: {
+        //     model: Type,
+            attributes: ['id', 'name', 'img', 'type'],
+        //     through: {
+        //         attributes: [type]
+        //     }
+        // }
     });
     return pokemonsDb
 };
@@ -25,12 +28,13 @@ async function getPokemonsApi() {
         arrayPokemons.push({
             id: url.data.id,
             name: url.data.name,
-            height: url.data.height,
-            weight: url.data.weight,
-            life: url.data.stats[0].base_stat,
-            attack: url.data.stats[1].base_stat,
-            defense: url.data.stats[2].base_stat,
-            speed: url.data.stats[5].base_stat,
+            // height: url.data.height,
+            // weight: url.data.weight,
+            // life: url.data.stats[0].base_stat,
+            // attack: url.data.stats[1].base_stat,
+            // defense: url.data.stats[2].base_stat,
+            // speed: url.data.stats[5].base_stat,
+            type: url.data.types.map(e => e.type.name),
             img: url.data.sprites.front_default,
         })      
     }
@@ -53,13 +57,13 @@ async function getPokemonById(value) {
         })
         return poke
     } else {
-    return getPokemonByNameApi(value)
+    return getPokemonByIdApi(value)
 }
 }
 
-async function getPokemonByNameApi(value) {
+async function getPokemonByIdApi(value) {
     try {
-        const pokemonUrl = await axios(`https://pokeapi.co/api/v2/pokemon/${value}`)
+        const pokemonUrl = await axios(`https://pokeapi.co/api/v2/pokemon/${value.toLowerCase().trim()}`)
         let pokemon = {
                 id: pokemonUrl.data.id,
                 name: pokemonUrl.data.name,
@@ -69,11 +73,12 @@ async function getPokemonByNameApi(value) {
                 attack: pokemonUrl.data.stats[1].base_stat,
                 defense: pokemonUrl.data.stats[2].base_stat,
                 speed: pokemonUrl.data.stats[5].base_stat,
+                type: pokemonUrl.data.types.map(e => e.type.name),
                 img: pokemonUrl.data.sprites.front_default,
         }
         return pokemon
     } catch (error) {
-        return error
+        return 'No se encontro un pokemon con ese Id'
     }
 }
 
@@ -87,10 +92,27 @@ async function getPokemonByName(name) {
     return pokemon
 }
 
+async function getTypes() {
+    let typesAPi = await axios('https://pokeapi.co/api/v2/type')
+    let arrayTypes = typesAPi.data.results.map(e => {return {name: e.name}})
+
+    await Type.bulkCreate(arrayTypes)
+
+    let typesDb = await Type.findAll({
+        // include: {
+        //     model: Pokemon,
+            attributes: ['id', 'name']
+        // }
+    });
+    return typesDb
+}
+
+
 module.exports = {
     getPokemonsDb,
     getPokemonsApi,
     getAllPokemons,
     getPokemonById,
-    getPokemonByName
+    getPokemonByName,
+    getTypes
 }
