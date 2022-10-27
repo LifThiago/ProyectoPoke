@@ -109,17 +109,11 @@ async function getTypes() {
 
 async function createPokemon(values) {
     const { name, hp, height, weight, attack, defense, speed, type, img} = values
-    // let exist = await axios(`https://pokeapi.co/api/v2/pokemon/${name.toLowerCase().trim()}`)
-    // if(exist) return 'El nombre de este pokemon ya esta usado'
-    // else {
-    //     let pokemon = await Pokemon.create({name, hp, height, weight, attack, defense, speed, type, img})
-    //     return pokemon
-    // }
     try {
         let exist = await axios(`https://pokeapi.co/api/v2/pokemon/${name.toLowerCase().trim()}`)
-        if(exist) return 'El nombre de este pokemon ya esta usado'
+        if(exist) return 'El nombre de este pokemon ya existe en la API'
     } catch (error) {
-        let pokemon = await Pokemon.create({name, hp, height, weight, attack, defense, speed, type, img})
+        let pokemon = await Pokemon.create(values)
         return pokemon
     }
 }

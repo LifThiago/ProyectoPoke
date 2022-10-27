@@ -67,7 +67,7 @@ router.post('/pokemons', async (req, res) => {
         // let pokemon = await Pokemon.create(req.body)
         res.status(200).send(pokemon)
     } catch (error) {
-        res.send(error)
+        res.send('Este pokemon ya existe en la DB')
     }
 })
 
