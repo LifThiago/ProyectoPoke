@@ -107,6 +107,23 @@ async function getTypes() {
     return typesDb
 }
 
+async function createPokemon(values) {
+    const { name, hp, height, weight, attack, defense, speed, type, img} = values
+    // let exist = await axios(`https://pokeapi.co/api/v2/pokemon/${name.toLowerCase().trim()}`)
+    // if(exist) return 'El nombre de este pokemon ya esta usado'
+    // else {
+    //     let pokemon = await Pokemon.create({name, hp, height, weight, attack, defense, speed, type, img})
+    //     return pokemon
+    // }
+    try {
+        let exist = await axios(`https://pokeapi.co/api/v2/pokemon/${name.toLowerCase().trim()}`)
+        if(exist) return 'El nombre de este pokemon ya esta usado'
+    } catch (error) {
+        let pokemon = await Pokemon.create({name, hp, height, weight, attack, defense, speed, type, img})
+        return pokemon
+    }
+}
+
 
 module.exports = {
     getPokemonsDb,
@@ -114,5 +131,6 @@ module.exports = {
     getAllPokemons,
     getPokemonById,
     getPokemonByName,
-    getTypes
+    getTypes,
+    createPokemon
 }
