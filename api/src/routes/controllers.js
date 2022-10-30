@@ -16,29 +16,33 @@ async function getPokemonsDb() {
 
 
 async function getPokemonsApi() {
-    const pokemonsUrlApi = await axios(
-        'https://pokeapi.co/api/v2/pokemon?offset=0&limit=3'
-        // Hago el "fetch" a la api y me traigo 3 en total
-    )
-    const pokemonUrl = pokemonsUrlApi.data.results.map(e => e.url)
-    //Me guardo el url que lleva al detalle de cada pokemon
-    let arrayPokemons = []
-    for(let i=0; i<pokemonUrl.length; i++) {
-        let url = await axios(pokemonUrl[i]);
-        arrayPokemons.push({
-            id: url.data.id,
-            name: url.data.name,
-            // height: url.data.height,
-            // weight: url.data.weight,
-            // life: url.data.stats[0].base_stat,
-            // attack: url.data.stats[1].base_stat,
-            // defense: url.data.stats[2].base_stat,
-            // speed: url.data.stats[5].base_stat,
-            type: url.data.types.map(e => e.type.name),
-            img: url.data.sprites.front_default,
-        })      
+    try {
+        let arrayPokemons = []
+    
+        const firstCallApi = await axios('https://pokeapi.co/api/v2/pokemon')
+        // Hago el "fetch" a la api
+        const secondCallApi = await axios(firstCallApi.data.next)
+        // return firstCallApi.data.results.map(e => e.url)
+    
+        const firstPokemonUrl = firstCallApi.data.results.map(e => e.url)
+        const SecondPokemonUrl = secondCallApi.data.results.map((e) => e.url)
+    
+        const allPokemonUrl = firstPokemonUrl.concat(SecondPokemonUrl)
+        const allPokemonsPromises = await Promise.all(allPokemonUrl)
+        
+        for(let i = 0; i < allPokemonsPromises.length; i++) {
+            const url = await axios(allPokemonsPromises[i]);
+            arrayPokemons.push({
+                id: url.data.id,
+                name: url.data.name,
+                type: url.data.types.map(e => e.type.name),
+                img: url.data.sprites.front_default,
+            })      
+        }
+        return arrayPokemons;
+    } catch (error) {
+        return error
     }
-    return arrayPokemons;
 }
 
 async function getAllPokemons() {

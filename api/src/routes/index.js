@@ -26,7 +26,7 @@ router.get('/pokeapi', async (req, res, next) => { // Ruta para los pokemon de A
         console.log(pokemonsApi)
         res.status(200).json(pokemonsApi)
     } catch (error) {
-        res.status(404).send('Error')
+        res.status(404).send(error)
     }
 });
 
@@ -35,7 +35,7 @@ router.get('/pokemons', async (req, res) => { //Ruta para todos los pokemon
         if (name) {
             try {
                 let pokemon = await getPokemonByName(name)
-                res.status(200).json(pokemon)
+                res.status(200).send(pokemon)
             } catch (error) {
                 res.send(error)
             }
