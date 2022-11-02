@@ -5,7 +5,7 @@ async function getPokemonsDb() {
     let pokemonsDb = await Pokemon.findAll({
         // include: {
         //     model: Type,
-            attributes: ['id', 'name', 'img', 'type'],
+            attributes: ['id', 'name', 'img'],
         //     through: {
         //         attributes: [type]
         //     }
@@ -35,10 +35,10 @@ async function getPokemonsApi() {
             arrayPokemons.push({
                 id: url.data.id,
                 name: url.data.name,
-                type: url.data.types.map(e => e.type.name),
+                // type: url.data.types.map(e => e.type.name),
                 img: url.data.sprites.front_default,
             })      
-        }
+        } 
         return arrayPokemons;
     } catch (error) {
         return error
@@ -135,20 +135,38 @@ async function getTypes() {
 
 async function createPokemon(values) {
     const { name, hp, height, weight, attack, defense, speed, type, img} = values
-    let pokemon = await Pokemon.findOrCreate({
-        where: {name: name},
-        defaults: {
-            name,
-            hp,
-            attack,
-            defense,
-            speed,
-            height,
-            weight,
-            img
+    try {
+        let pokemon = await Pokemon.findOrCreate({
+            where: {name: name},
+            defaults: {
+                name,
+                hp,
+                attack,
+                defense,
+                speed,
+                height,
+                weight,
+                img
+            }
+        })
+
+        if(pokemon[1] === false) {
+            return 'Este pokemon ya existe, elegí otro nombre'
         }
-    })
-    return pokemon
+
+        else {
+            let typesDb = await Type.findAll({
+                where:{
+                    name: type
+                }
+            })
+            await pokemon[0].addType(typesDb)
+            return pokemon
+        }
+    
+    } catch (error) {
+        return error
+    }
 }
 
 

@@ -1,0 +1,1 @@
+En el form hacer todos los campos obligatorios, o ver como hacer que se rellenen solos sino.

@@ -55,7 +55,7 @@ module.exports = (sequelize) => {
 
     img: {
       type: DataTypes.TEXT,
-      // defaultValue: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/2052px-Pok%C3%A9_Ball_icon.svg.png',
+      defaultValue: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Pok%C3%A9ball.png/640px-Pok%C3%A9ball.png',
       validate: {
         isUrl: true,
       }

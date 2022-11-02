@@ -42,7 +42,7 @@ router.get('/pokemons', async (req, res) => { //Ruta para todos los pokemon
         } else {
             try {
                 let allPokes = await getAllPokemons()
-                res.status(200).json(allPokes)
+                res.status(200).send(allPokes)
             } catch (error) {
                 res.send(error)
             }
@@ -79,24 +79,16 @@ router.get('/types', async (req, res) => {
 
 router.post('/pokemons', async (req, res) => {
     const { name, type } = req.body
-    if(!name) res.status(400).send('Falta enviar el nombre del pokemon')
-
-    else {
-        // let pokemon = await Pokemon.create({name: name})
-        // let types = await Type.findAll({
-        //     where:{
-        //         name: type
-        //     }
-        // })
-        // pokemon.addType(types)
-        // res.status(200).send(pokemon)
-        let pokemon = await createPokemon(req.body)
-        // console.log(pokemon[1])
-        if(pokemon[1] === false) res.status(200).send('Este pokemon ya existe') 
-        res.status(200).send(pokemon)
+    try {
+        if(!name) res.status(400).send('Falta enviar el nombre del pokemon')
+        else {
+            let pokemon = await createPokemon(req.body)
+            // if(pokemon[1] === false) res.status(200).send('Este pokemon ya existe') 
+            res.status(200).send(pokemon)
+        }
+    } catch (error) {
+        res.send(error)
     }
-
-    // res.status(200).send(name)
 })
 
 

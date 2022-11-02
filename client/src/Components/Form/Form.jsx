@@ -1,5 +1,5 @@
 import React from 'react'
-import axios from "axios" //BORRAR
+import axios from 'axios'
 
 export default function Form() {
 
@@ -12,20 +12,14 @@ export default function Form() {
     height: '',
     weight: '',
     img: '',
-    // type: []
+    type: ''
   })
 
-  function handleInputChange(e) {
-    setInput({
-      ...input,
-      [e.target.name]: e.target.value
-    })
-  }
-
+  
   function handleSubmit() {
     axios.post('http://localhost:3001/pokemons', input)
     .then(res => console.log(res.data))
-    .catch(err => console.log('err'))
+    .catch(err => console.log(err))
     setInput({
       name: '',
       hp: '',
@@ -35,21 +29,79 @@ export default function Form() {
       height: '',
       weight: '',
       img: '',
-      // type: []
+      type: ''
+    })
+  }
+
+  function handleInputChange(e) {
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value
     })
   }
 
   return (
-    <div>
-      <label>Nombre: </label>
-      <input name='name' value={input.name} onChange={handleInputChange}/>
+    <form>
+      <label>Name: </label>
+      <input name='name' value={input.name} onChange={handleInputChange} />
       <br />
-      <label>Vida: </label>
-      <input name='hp' type="number" value={input.hp} onChange={handleInputChange}/>
+
+      <label>HP: </label>
+      <input name='hp' type="number" value={input.hp} onChange={handleInputChange} />
       <br />
-      {/* <label>Type: </label>
-      <input name='type' type="array" value={input.type} onChange={handleInputChange}/> */}
+
+      <label>Attack: </label>
+      <input name='attack' type='number' value={input.attack} onChange={handleInputChange} />
+      <br />
+
+      <label>Defense: </label>
+      <input name='defense' type='number' value={input.defense} onChange={handleInputChange} />
+      <br />
+
+      <label>Speed: </label>
+      <input name='speed' type='number' value={input.speed} onChange={handleInputChange} />
+      <br />
+
+      <label>Height: </label>
+      <input name='height' type='number' value={input.height} onChange={handleInputChange} />
+      <br />
+
+      <label>Weight: </label>
+      <input name='weight' type='number' value={input.weight} onChange={handleInputChange} />
+      <br />
+
+      <label>Image: </label>
+      <input name='img' type='url' value={input.img} onChange={handleInputChange} />
+      <br />
+
+      <label>Type: </label>
+      {/* <input list='weight' name='weight' value={input.weight} onChange={handleInputChange} /> */}
+      <input list='type' name='type' value={input.type} onChange={handleInputChange} />
+      <datalist id="type">
+        <option value="normal" />
+        <option value="fighting" />
+        <option value="flying" />
+        <option value="poison" />
+        <option value="ground" />
+        <option value="rock" />
+        <option value="bug" />
+        <option value="ghost" />
+        <option value="steel" />
+        <option value="fire" />
+        <option value="water" />
+        <option value="grass" />
+        <option value="electric" />
+        <option value="psychic" />
+        <option value="ice" />
+        <option value="dragon" />
+        <option value="dark" />
+        <option value="fairy" />
+        <option value="unknown" />
+        <option value="shadow" />
+      </datalist>
+      
+
       <button onClick={handleSubmit}></button>
-    </div>
+    </form>
   )
 }

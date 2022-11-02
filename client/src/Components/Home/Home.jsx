@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <div>Home
       <ul>
-        {pokemons.map(p => <li>{p.name}</li>)}
+        {/* {pokemons.map(p => <li>{p.name}</li>)} */}
       </ul>
     </div>
   )
