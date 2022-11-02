@@ -111,15 +111,44 @@ async function getTypes() {
     return typesDb
 }
 
+// async function createPokemon(values) {
+//     const { name, hp, height, weight, attack, defense, speed, type, img} = values
+//     try {
+
+//         let exist = await axios(`https://pokeapi.co/api/v2/pokemon/${name.toLowerCase().trim()}`)
+//         if(exist) return `El nombre ${name} ya existe en la API, proba con otro nombre`
+
+//     } catch (error) {
+
+//         let pokemon = await Pokemon.create(values)
+
+//         let typesDb = await Type.findAll({
+//             where: {
+//                 name: type
+//             }
+//         })
+
+//         await pokemon.addType(typesDb)
+//         return pokemon
+//     }
+// }
+
 async function createPokemon(values) {
     const { name, hp, height, weight, attack, defense, speed, type, img} = values
-    try {
-        let exist = await axios(`https://pokeapi.co/api/v2/pokemon/${name.toLowerCase().trim()}`)
-        if(exist) return 'El nombre de este pokemon ya existe en la API'
-    } catch (error) {
-        let pokemon = await Pokemon.create(values)
-        return pokemon
-    }
+    let pokemon = await Pokemon.findOrCreate({
+        where: {name: name},
+        defaults: {
+            name,
+            hp,
+            attack,
+            defense,
+            speed,
+            height,
+            weight,
+            img
+        }
+    })
+    return pokemon
 }
 
 

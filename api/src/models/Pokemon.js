@@ -61,10 +61,10 @@ module.exports = (sequelize) => {
       }
     },
 
-    type: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
-      defaultValue: ['normal']
-    },
+    // type: {
+    //   type: DataTypes.ARRAY(DataTypes.STRING),
+    //   defaultValue: ['normal']
+    // },
 
     createdDB: {
       type: DataTypes.BOOLEAN,

@@ -2,7 +2,7 @@ const { default: axios } = require('axios');
 const { Router } = require('express');
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
-const {Pokemon, Type } = require('../db.js');
+const {Pokemon, Type, PokemonsTypes } = require('../db.js');
 const { getPokemonsDb, getPokemonsApi, getAllPokemons, getPokemonById, getPokemonByName, getTypes, createPokemon } = require('./controllers.js');
 
 
@@ -59,21 +59,44 @@ router.get('/pokemons/:id', async (req, res) => {
     }
 })
 
-router.post('/pokemons', async (req, res) => {
-    const { name } = req.body
-    if(!name) return res.status(400).send('Falta enviar el nombre del Pokemon')
-    try {
-        let pokemon = await createPokemon(req.body)
-        // let pokemon = await Pokemon.create(req.body)
-        res.status(200).send(pokemon)
-    } catch (error) {
-        res.send('Este pokemon ya existe en la DB')
-    }
-})
+// router.post('/pokemons', async ({name, hp, height, weight, attack, defense, speed, type='ice', img}, res) => {
+//     // const { name, type } = req.body
+//     // if(!type) return res.status(400).send('Tenes que agregar un tipo al Pokemon')
+//     if(!name) return res.status(400).send('Falta enviar el nombre del Pokemon')
+//     try {
+//         let pokemon = await createPokemon(req.body)
+//         // let pokemon = await Pokemon.create(req.body)
+//         res.status(200).send(pokemon)
+//     } catch (error) {
+//         res.send('Este pokemon ya existe en la DB')
+//     }
+// })
 
 router.get('/types', async (req, res) => {
     let result = await getTypes()
     res.send(result)
+})
+
+router.post('/pokemons', async (req, res) => {
+    const { name, type } = req.body
+    if(!name) res.status(400).send('Falta enviar el nombre del pokemon')
+
+    else {
+        // let pokemon = await Pokemon.create({name: name})
+        // let types = await Type.findAll({
+        //     where:{
+        //         name: type
+        //     }
+        // })
+        // pokemon.addType(types)
+        // res.status(200).send(pokemon)
+        let pokemon = await createPokemon(req.body)
+        // console.log(pokemon[1])
+        if(pokemon[1] === false) res.status(200).send('Este pokemon ya existe') 
+        res.status(200).send(pokemon)
+    }
+
+    // res.status(200).send(name)
 })
 
 
