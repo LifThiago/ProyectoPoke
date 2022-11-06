@@ -5,7 +5,7 @@ async function getPokemonsDb() {
     let pokemonsDb = await Pokemon.findAll({
         // include: {
         //     model: Type,
-            attributes: ['id', 'name', 'img'],
+            attributes: ['id', 'name', 'img', 'type'],
         //     through: {
         //         attributes: [type]
         //     }
@@ -20,6 +20,7 @@ async function getPokemonsApi() {
         let arrayPokemons = []
     
         const firstCallApi = await axios('https://pokeapi.co/api/v2/pokemon')
+        // const firstCallApi = await axios('https://pokeapi.co/api/v2/pokemon?offset=0&limit=2')
         // Hago el "fetch" a la api
         const secondCallApi = await axios(firstCallApi.data.next)
         // return firstCallApi.data.results.map(e => e.url)
@@ -35,7 +36,7 @@ async function getPokemonsApi() {
             arrayPokemons.push({
                 id: url.data.id,
                 name: url.data.name,
-                // type: url.data.types.map(e => e.type.name),
+                type: url.data.types.map(e => e.type.name),
                 img: url.data.sprites.front_default,
             })      
         } 
@@ -46,23 +47,15 @@ async function getPokemonsApi() {
 }
 
 async function getAllPokemons() {
-    let pokemonsDb = await getPokemonsDb();
-    let pokemonsApi = await getPokemonsApi();
-    let allPokes = pokemonsApi.concat(pokemonsDb)
+    try {
+        let pokemonsDb = await getPokemonsDb();
+        let pokemonsApi = await getPokemonsApi();
+        // let allPokes = pokemonsApi.concat(pokemonsDb)
+        let allPokes = Promise.all(pokemonsApi, pokemonsDb)
     return allPokes
-}
-
-async function getPokemonById(value) {
-    if(value.length > 15) {
-        let poke = Pokemon.findOne({
-            where: {
-                id: value
-            }
-        })
-        return poke
-    } else {
-    return getPokemonByIdApi(value)
-}
+    } catch (error) {
+        return error
+    }
 }
 
 async function getPokemonByIdApi(value) {
@@ -84,6 +77,19 @@ async function getPokemonByIdApi(value) {
     } catch (error) {
         return 'No se encontro un pokemon con ese Id'
     }
+}
+
+async function getPokemonById(value) {
+    if(value.length > 15) {
+        let poke = Pokemon.findOne({
+            where: {
+                id: value
+            }
+        })
+        return poke
+    } else {
+    return getPokemonByIdApi(value)
+}
 }
 
 async function getPokemonByName(name) {
@@ -146,29 +152,34 @@ async function createPokemon(values) {
                 speed,
                 height,
                 weight,
-                img
+                img,
+                type
             }
         })
+
+        const types = Type.findAll()
+        if(types.length === 0) {
+            await getTypes()
+        }
 
         if(pokemon[1] === false) {
             return 'Este pokemon ya existe, elegí otro nombre'
         }
 
-        else {
-            let typesDb = await Type.findAll({
-                where:{
-                    name: type
-                }
-            })
-            await pokemon[0].addType(typesDb)
+        // else {
+        //     let typesDb = await Type.findAll({
+        //         where:{
+        //             name: type
+        //         }
+        //     })
+        //     await pokemon[0].addType(typesDb)
             return pokemon
-        }
+        // }
     
     } catch (error) {
         return error
     }
 }
-
 
 module.exports = {
     getPokemonsDb,

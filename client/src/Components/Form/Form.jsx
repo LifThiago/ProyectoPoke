@@ -12,11 +12,12 @@ export default function Form() {
     height: '',
     weight: '',
     img: '',
-    type: ''
+    // type: []
   })
 
   
-  function handleSubmit() {
+  function handleSubmit(e) {
+    e.preventDefault()
     axios.post('http://localhost:3001/pokemons', input)
     .then(res => console.log(res.data))
     .catch(err => console.log(err))
@@ -29,7 +30,7 @@ export default function Form() {
       height: '',
       weight: '',
       img: '',
-      type: ''
+      // type: []
     })
   }
 
