@@ -12,7 +12,7 @@ export default function Form() {
     height: '',
     weight: '',
     img: '',
-    // type: []
+    type: ''
   })
 
   
@@ -30,7 +30,7 @@ export default function Form() {
       height: '',
       weight: '',
       img: '',
-      // type: []
+      type: ''
     })
   }
 
@@ -39,6 +39,7 @@ export default function Form() {
       ...input,
       [e.target.name]: e.target.value
     })
+    console.log(e.target.value)
   }
 
   return (
