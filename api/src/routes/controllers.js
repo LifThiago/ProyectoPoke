@@ -20,15 +20,15 @@ async function getPokemonsApi() {
         let arrayPokemons = []
     
         const firstCallApi = await axios('https://pokeapi.co/api/v2/pokemon')
-        // const firstCallApi = await axios('https://pokeapi.co/api/v2/pokemon?offset=0&limit=2')
+        // const firstCallApi = await axios('https://pokeapi.co/api/v2/pokemoooooooooooooooooooooooon')
         // Hago el "fetch" a la api
         const secondCallApi = await axios(firstCallApi.data.next)
         // return firstCallApi.data.results.map(e => e.url)
     
-        const firstPokemonUrl = firstCallApi.data.results.map(e => e.url)
-        const SecondPokemonUrl = secondCallApi.data.results.map((e) => e.url)
+        const firstPokemonUrl = await firstCallApi.data.results.map((e) => e.url)
+        const SecondPokemonUrl = await secondCallApi.data.results.map((e) => e.url)
     
-        const allPokemonUrl = firstPokemonUrl.concat(SecondPokemonUrl)
+        const allPokemonUrl = await firstPokemonUrl.concat(SecondPokemonUrl)
         const allPokemonsPromises = await Promise.all(allPokemonUrl)
         
         for(let i = 0; i < allPokemonsPromises.length; i++) {
@@ -50,9 +50,9 @@ async function getAllPokemons() {
     try {
         let pokemonsDb = await getPokemonsDb();
         let pokemonsApi = await getPokemonsApi();
-        // let allPokes = pokemonsApi.concat(pokemonsDb)
-        let allPokes = Promise.all(pokemonsApi, pokemonsDb)
-    return allPokes
+        // let allPokes = await pokemonsDb.concat(pokemonsApi)
+        let allPokes = await pokemonsApi.concat(pokemonsDb)
+        return allPokes
     } catch (error) {
         return error
     }
@@ -166,15 +166,15 @@ async function createPokemon(values) {
             return 'Este pokemon ya existe, elegí otro nombre'
         }
 
-        // else {
-        //     let typesDb = await Type.findAll({
-        //         where:{
-        //             name: type
-        //         }
-        //     })
-        //     await pokemon[0].addType(typesDb)
+        else {
+            let typesDb = await Type.findAll({
+                where:{
+                    name: type
+                }
+            })
+            await pokemon[0].addType(typesDb)
             return pokemon
-        // }
+        }
     
     } catch (error) {
         return error

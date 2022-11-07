@@ -7,11 +7,13 @@ import Detail from './Components/Detail/Detail';
 function App() {
   return (
     <div className="App">
+      <Link to='/' >Volver al inicio</Link>
+      <br />
+      <Link to='/create' >Create</Link>
       <h1>Henry Pokemon</h1>
       <Route exact path='/' >
         <Link to='/home' >Ver pokemon</Link>
         <br />
-        <Link to='/create' >Create</Link>
       </Route>
 
     <Route path='/home' >
