@@ -1,1 +1,2 @@
 En el form hacer todos los campos obligatorios, o ver como hacer que se rellenen solos sino.
+Ver si se puede trabajar solo desde la db, o por lo menos cargarlos, trabajar de ahí y borrarlos cada vez que entras
