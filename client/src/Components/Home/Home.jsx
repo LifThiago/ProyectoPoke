@@ -11,6 +11,7 @@ export default function Home() {
   }, [dispatch])
 
   const allPokemons = useSelector((state) => state.allPokemons)
+  const pokemon = useSelector((state) => state.pokemon)
   console.log(allPokemons)
 
   return (
@@ -23,12 +24,30 @@ export default function Home() {
             allPokemons.map(p => {
               return (
                 <Card name={p.name} img={p.img} types={p.type} key={p.id} id={p.id} />
-                // <h3>{p.name}</h3>
               )
             })
           )
         }
       </div>
+
+      {/* <div>
+        {
+          pokemon.name !== undefined ? (
+            <Card name={pokemon.name} img={pokemon.img} types={pokemon.types} id={pokemon.id} key={pokemon.id} />
+          ) : (
+            allPokemons.length === 0 ? (
+              <h1>Loading...</h1>
+            ) : (
+              allPokemons.map(p => {
+                return (
+                  <Card name={p.name} img={p.img} types={p.type} key={p.id} id={p.id} />
+                )
+              })
+            )
+          )
+        }
+      </div> */}
+
     </div>
   )
 }
