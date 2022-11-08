@@ -66,7 +66,7 @@ module.exports = (sequelize) => {
       defaultValue: 'normal'
     },
 
-    createdDB: {
+    createdDb: {
       type: DataTypes.BOOLEAN,
       defaultValue: true
     },

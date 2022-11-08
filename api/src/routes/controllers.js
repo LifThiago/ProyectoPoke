@@ -5,7 +5,7 @@ async function getPokemonsDb() {
     let pokemonsDb = await Pokemon.findAll({
         // include: {
         //     model: Type,
-            attributes: ['id', 'name', 'img', 'type'],
+            attributes: ['id', 'name', 'img', 'type', 'createdDb'],
             // attributes: ['id', 'name', 'img'],
         //     through: {
         //         attributes: [type]
