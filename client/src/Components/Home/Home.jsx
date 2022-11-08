@@ -13,6 +13,7 @@ export default function Home() {
   const allPokemons = useSelector((state) => state.allPokemons)
   let filterPokemons = []
   // const pokemon = useSelector((state) => state.pokemon)
+  console.log(allPokemons)
   // console.log(filterPokemons)
 
   function handleStore(e){

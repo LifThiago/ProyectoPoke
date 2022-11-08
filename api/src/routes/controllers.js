@@ -80,17 +80,37 @@ async function getPokemonByIdApi(value) {
     }
 }
 
-async function getPokemonById(value) {
-    if(value.length > 15) {
-        let poke = Pokemon.findOne({
-            where: {
-                id: value
+// async function getPokemonById(value) {
+//     if(value.length > 15) {
+//         let poke = Pokemon.findOne({
+//             where: {
+//                 id: value
+//             }
+//         })
+//         return poke
+//     } else {
+//     return getPokemonByIdApi(value)
+// }
+// }
+async function getPokemonById(value){
+    try {
+        if(value.length > 15) {
+            let poke = await Pokemon.findByPk(value)
+            return poke
+        } else {
+            let poke = await Pokemon.findOne({
+                where:{
+                    name: value
+                }
+            })
+            if(poke){ return poke }
+            else {
+                return getPokemonByIdApi(value)
             }
-        })
-        return poke
-    } else {
-    return getPokemonByIdApi(value)
-}
+        }
+    } catch (error) {
+        return error
+    }
 }
 
 async function getPokemonByName(name) {
