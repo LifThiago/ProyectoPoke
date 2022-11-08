@@ -1,8 +1,9 @@
-import { GET_ALL_POKEMONS, GET_POKEMON_BY_ID, SEARCH_POKEMON } from "../actions";
+import { FILTER_BY_STORAGE, GET_ALL_POKEMONS, GET_POKEMON_BY_ID, SEARCH_POKEMON } from "../actions";
 
 const initialState = {
     allPokemons: [],
-    pokemon: {}
+    pokemon: {},
+    pokemonsFilter: []
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -10,7 +11,8 @@ const rootReducer = (state = initialState, action) => {
         case GET_ALL_POKEMONS:
             return {
                 ...state,
-                allPokemons: action.payload
+                allPokemons: action.payload,
+                pokemonsFilter: action.payload
             }
 
         case GET_POKEMON_BY_ID:
@@ -24,6 +26,19 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 pokemon: action.payload
             }
+
+        case FILTER_BY_STORAGE:{
+            let allPokemonsFilteredDb = state.pokemonsFilter
+
+            const filterByStorage =
+            action.payload === 'inDb' ? state.pokemonsFilter.filter(p => p.createdDb) :
+            state.pokemonsFilter.filter(p => !p.createdDb);
+            return{
+                ...state,
+                allPokemons: 
+                action.payload === 'all' ? allPokemonsFilteredDb : filterByStorage
+            }
+        }
 
         default:
             return {...state}

@@ -1,7 +1,9 @@
 import React from 'react'
 import axios from 'axios'
+import { useHistory } from 'react-router-dom'
 
 export default function Form() {
+  const history = useHistory()
 
   const [input, setInput] = React.useState({
     name: '',
@@ -32,6 +34,7 @@ export default function Form() {
       img: '',
       type: ''
     })
+    history.push('/home')
   }
 
   function handleInputChange(e) {

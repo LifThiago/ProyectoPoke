@@ -3,6 +3,7 @@ import axios from "axios";
 export const GET_ALL_POKEMONS = 'GET_ALL_POKEMONS';
 export const GET_POKEMON_BY_ID = 'GET_POKEMON_BY_ID';
 export const SEARCH_POKEMON = 'SEARCH_POKEMON';
+export const FILTER_BY_STORAGE = 'FILTER_BY_STORAGE'
 
 export function getAllPokemons() {
     return async function(dispatch){
@@ -32,4 +33,11 @@ export function searchPokemon(name){
             payload: pokemon.data
         })
     }
+}
+
+export function filterByStorage(store){
+        return {
+            type: FILTER_BY_STORAGE,
+            payload: store
+        }
 }

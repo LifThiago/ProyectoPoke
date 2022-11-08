@@ -1,6 +1,6 @@
-import React, { useEffect} from 'react'
+import React, { useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import { getAllPokemons } from '../../Redux/actions'
+import { filterByStorage, getAllPokemons } from '../../Redux/actions'
 import Card from '../Card/Card'
 
 export default function Home() {
@@ -9,25 +9,29 @@ export default function Home() {
   useEffect(() => {
     dispatch(getAllPokemons())
   }, [dispatch])
+  // const [store, setStore] = useState('')
 
   const allPokemons = useSelector((state) => state.allPokemons)
-  let filterPokemons = []
+  let filterPokemons = allPokemons
   // const pokemon = useSelector((state) => state.pokemon)
   console.log(allPokemons)
   // console.log(filterPokemons)
 
+  // function handleStore(e){
+  //   console.log(e.target.value)
+  //   if(e.target.value === 'inApi') {
+  //     filterPokemons = allPokemons.filter(p => !p.createdDb)
+  //     console.log(filterPokemons)
+  //   } else if(e.target.value === 'inDb'){
+  //     filterPokemons = allPokemons.filter(p => p.createdDb === true)
+  //     console.log(filterPokemons)
+  //   } else if(e.target.value === 'all') {
+  //     filterPokemons = allPokemons
+  //     console.log(filterPokemons)
+  //   }
+  // }
   function handleStore(e){
-    console.log(e.target.value)
-    if(e.target.value === 'inApi') {
-      filterPokemons = allPokemons.filter(p => !p.createdDb)
-      console.log(filterPokemons)
-    } else if(e.target.value === 'inDb'){
-      filterPokemons = allPokemons.filter(p => p.createdDb === true)
-      console.log(filterPokemons)
-    } else if(e.target.value === 'all') {
-      filterPokemons = allPokemons
-      console.log(filterPokemons)
-    }
+    dispatch(filterByStorage(e.target.value))
   }
 
 
