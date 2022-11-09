@@ -20,8 +20,8 @@ async function getPokemonsApi() {
     try {
         let arrayPokemons = []
     
-        // const firstCallApi = await axios('https://pokeapi.co/api/v2/pokemon')
-        const firstCallApi = await axios('https://pokeapi.co/api/v2/pokemon?limit=2')
+        const firstCallApi = await axios('https://pokeapi.co/api/v2/pokemon')
+        // const firstCallApi = await axios('https://pokeapi.co/api/v2/pokemon?limit=2')
         // Hago el "fetch" a la api
         const secondCallApi = await axios(firstCallApi.data.next)
         // return firstCallApi.data.results.map(e => e.url)
@@ -39,6 +39,7 @@ async function getPokemonsApi() {
                 name: url.data.name,
                 type: url.data.types.map(e => e.type.name),
                 img: url.data.sprites.front_default,
+                attack: url.data.stats[1].base_stat
             })      
         } 
         return arrayPokemons;
