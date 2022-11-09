@@ -4,7 +4,8 @@ export const GET_ALL_POKEMONS = 'GET_ALL_POKEMONS';
 export const GET_POKEMON_BY_ID = 'GET_POKEMON_BY_ID';
 export const SEARCH_POKEMON = 'SEARCH_POKEMON';
 export const FILTER_BY_STORAGE = 'FILTER_BY_STORAGE';
-export const SORT_BY_ATTACK = 'SORT_BY_ATTACK'
+export const SORT_BY_ATTACK = 'SORT_BY_ATTACK';
+export const SORT_BY_NAME = 'SORT_BY_NAME'
 
 export function getAllPokemons() {
     return async function(dispatch){
@@ -47,5 +48,12 @@ export function sortByAttack(attack){
     return {
         type: SORT_BY_ATTACK,
         payload: attack
+    }
+}
+
+export function sortByName(name){
+    return {
+        type: SORT_BY_NAME,
+        payload: name
     }
 }

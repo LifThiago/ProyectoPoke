@@ -1,6 +1,6 @@
 import React, { useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import { filterByStorage, getAllPokemons, sortByAttack } from '../../Redux/actions'
+import { filterByStorage, getAllPokemons, sortByAttack, sortByName } from '../../Redux/actions'
 import Card from '../Card/Card'
 
 export default function Home() {
@@ -26,6 +26,10 @@ export default function Home() {
     console.log(e.target.value)
     console.log(allPokemons)
   }
+  function handleName(e) {
+    dispatch(sortByName(e.target.value))
+    console.log(allPokemons)
+  }
 
 
   return (
@@ -43,6 +47,15 @@ export default function Home() {
       <div>
         <label>Attack</label>
         <select onChange={handleAttack} >
+          <option value='random' >Random</option>
+          <option value='asc' >ASC</option>
+          <option value='des' >DES</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Name</label>
+        <select onChange={handleName} >
           <option value='random' >Random</option>
           <option value='asc' >ASC</option>
           <option value='des' >DES</option>

@@ -1,9 +1,9 @@
-import { FILTER_BY_STORAGE, GET_ALL_POKEMONS, GET_POKEMON_BY_ID, SEARCH_POKEMON, SORT_BY_ATTACK } from "../actions";
+import { FILTER_BY_STORAGE, GET_ALL_POKEMONS, GET_POKEMON_BY_ID, SEARCH_POKEMON, SORT_BY_ATTACK, SORT_BY_NAME } from "../actions";
 
 const initialState = {
     allPokemons: [],
     pokemon: {},
-    pokemonsFilter: []
+    pokemonsFilter: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -43,11 +43,22 @@ const rootReducer = (state = initialState, action) => {
         case SORT_BY_ATTACK: {
             let pokemonsSorted = state.pokemonsFilter
             const sortByAttack =
-            action.payload === 'asc' ? state.pokemonsFilter.sort(function(a,b){return a.attack-b.attack}) : 
-            state.pokemonsFilter.sort(function(a ,b){return a.attack+b.attack});
+            action.payload === 'asc' ? state.pokemonsFilter.sort(function(a,b){return a.attack - b.attack}) : 
+            state.pokemonsFilter.sort(function(a ,b){return b.attack - a.attack});
             return {
                 ...state,
-                allPokemons: action.payload === 'random' ? pokemonsSorted : sortByAttack
+                allPokemons: sortByAttack
+            }
+        }
+        
+        case SORT_BY_NAME: {
+            let sortByName = 
+            action.payload === 'asc' ? 
+            state.pokemonsFilter.sort((a,b) => a.name.localeCompare(b.name)) :
+            state.pokemonsFilter.sort((a,b) => b.name.localeCompare(a.name))
+            return {
+                ...state,
+                allPokemons: sortByName
             }
         }
 
