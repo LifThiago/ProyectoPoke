@@ -1,5 +1,6 @@
 import React, { useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
+import { Link } from 'react-router-dom'
 import { filterByStorage, getAllPokemons, sortByAttack, sortByName } from '../../Redux/actions'
 import Card from '../Card/Card'
 
@@ -9,7 +10,7 @@ export default function Home() {
   useEffect(() => {
     dispatch(getAllPokemons())
   }, [dispatch])
-  // const [store, setStore] = useState('')
+  const [order, setOrder] = useState('')
 
   const allPokemons = useSelector((state) => state.allPokemons)
   let filterPokemons = allPokemons
@@ -20,20 +21,25 @@ export default function Home() {
 
   function handleStore(e){
     dispatch(filterByStorage(e.target.value))
+    setOrder(e.target.value)
   }
   function handleAttack(e){
     dispatch(sortByAttack(e.target.value))
+    setOrder(e.target.value)
     console.log(e.target.value)
     console.log(allPokemons)
   }
   function handleName(e) {
     dispatch(sortByName(e.target.value))
+    setOrder(e.target.value)
     console.log(allPokemons)
   }
 
 
   return (
     <div>Home
+      <br/>
+      <Link to='/create' >Create pokemon</Link>
 
       <div>
         <label>Show pokemons in...</label>

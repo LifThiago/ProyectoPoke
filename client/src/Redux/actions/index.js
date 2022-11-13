@@ -5,7 +5,8 @@ export const GET_POKEMON_BY_ID = 'GET_POKEMON_BY_ID';
 export const SEARCH_POKEMON = 'SEARCH_POKEMON';
 export const FILTER_BY_STORAGE = 'FILTER_BY_STORAGE';
 export const SORT_BY_ATTACK = 'SORT_BY_ATTACK';
-export const SORT_BY_NAME = 'SORT_BY_NAME'
+export const SORT_BY_NAME = 'SORT_BY_NAME';
+export const GET_TYPES = 'GET_TYPES'
 
 export function getAllPokemons() {
     return async function(dispatch){
@@ -55,5 +56,15 @@ export function sortByName(name){
     return {
         type: SORT_BY_NAME,
         payload: name
+    }
+}
+
+export function getTypes(){
+    return async function(dispatch){
+        const types = await axios.get('http://localhost:3001/types')
+        return dispatch({
+            type: GET_TYPES,
+            payload: types
+        })
     }
 }

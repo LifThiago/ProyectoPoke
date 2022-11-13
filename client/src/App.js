@@ -1,14 +1,15 @@
 import './App.css';
 import Form from './Components/Form/Form';
 import Home from './Components/Home/Home';
-import { Link, Route } from 'react-router-dom'
+import { Link, Route, Switch } from 'react-router-dom'
 import Detail from './Components/Detail/Detail';
 import Searchbar from './Components/Searchbar/Searchbar';
+import Landing from './Components/Landing/Landing';
 
 function App() {
   return (
     <div className="App">
-      <Searchbar />
+      {/* <Searchbar />
       <Link to='/' >Volver al inicio</Link>
       <br />
       <Link to='/create' >Create</Link>
@@ -16,7 +17,12 @@ function App() {
       <Route exact path='/' >
         <Link to='/home' >Ver pokemon</Link>
         <br />
-      </Route>
+      </Route> */}
+
+      <Switch>
+        <Route exact path='/'> <Landing /> </Route>
+        <Route path='/' > <Searchbar /> </Route>
+      </Switch>
 
     <Route path='/home' >
       <Home />

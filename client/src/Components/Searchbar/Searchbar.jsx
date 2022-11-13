@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { Link, Route, useHistory } from 'react-router-dom'
 import { searchPokemon } from '../../Redux/actions'
 
 export default function Searchbar() {
@@ -30,6 +30,7 @@ export default function Searchbar() {
 
   return (
     <div>
+        <Link to='/' > Volver al inicio </Link>
         <form onSubmit={handleSubmit} />
         <input type='text' placeholder='Search in pokedex' value={name} onChange={handleChange} />
         <button type='submit' onClick={handleSubmit} >Search!</button>

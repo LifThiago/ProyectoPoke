@@ -1,9 +1,10 @@
-import { FILTER_BY_STORAGE, GET_ALL_POKEMONS, GET_POKEMON_BY_ID, SEARCH_POKEMON, SORT_BY_ATTACK, SORT_BY_NAME } from "../actions";
+import { FILTER_BY_STORAGE, GET_ALL_POKEMONS, GET_POKEMON_BY_ID, GET_TYPES, SEARCH_POKEMON, SORT_BY_ATTACK, SORT_BY_NAME } from "../actions";
 
 const initialState = {
     allPokemons: [],
     pokemon: {},
     pokemonsFilter: [],
+    types: []
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -47,7 +48,7 @@ const rootReducer = (state = initialState, action) => {
             state.pokemonsFilter.sort(function(a ,b){return b.attack - a.attack});
             return {
                 ...state,
-                allPokemons: sortByAttack
+                allPokemons: action.payload === 'random' ? pokemonsSorted : sortByAttack
             }
         }
         
@@ -59,6 +60,13 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 allPokemons: sortByName
+            }
+        }
+
+        case GET_TYPES: {
+            return {
+                ...state,
+                types: action.payload
             }
         }
 

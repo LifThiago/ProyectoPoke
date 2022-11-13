@@ -1,21 +1,51 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 
+function validateString(string) {
+  let check = /^[a-zA-Z\s]*$/;
+  if(check.test(string)) {
+    return true
+  } else {
+    return false
+  }
+}
+function validateForm(input){
+  let errors = {};
+  if(validateString(input.name) !== true){
+    errors.name = 'The name only accepts numbers'
+  }
+  if(!input.name) {
+    errors.name = 'The pokemon must have a name'
+  }
+  if(input.hp.length === 0){
+    errors.hp = 'HP must be greater than 0'
+  } else if(input.hp > 999) {
+    errors.hp = 'HP must be less than 1000'
+  }
+  return errors
+}
+
 export default function Form() {
+  
   const history = useHistory()
 
   const [input, setInput] = React.useState({
     name: '',
-    hp: '',
-    attack: '',
-    defense: '',
-    speed: '',
-    height: '',
-    weight: '',
+    hp: 1,
+    attack: 1,
+    defense: 1,
+    speed: 1,
+    height: 1,
+    weight: 1,
     img: '',
-    type: ''
+    type: []
   })
+  // useEffect(() => {
+  //     setErrors(
+  //       validateForm(input)
+  //     )
+  // }, input)
 
   
   function handleSubmit(e) {
@@ -25,14 +55,14 @@ export default function Form() {
     .catch(err => console.log(err))
     setInput({
       name: '',
-      hp: '',
-      attack: '',
-      defense: '',
-      speed: '',
-      height: '',
-      weight: '',
+      hp: 1,
+      attack: 1,
+      defense: 1,
+      speed: 1,
+      height: 1,
+      weight: 1,
       img: '',
-      type: ''
+      type: []
     })
     history.push('/home')
   }
@@ -42,17 +72,37 @@ export default function Form() {
       ...input,
       [e.target.name]: e.target.value
     })
-    console.log(e.target.value)
+    setErrors(
+      validateForm({
+      ...input,
+      [e.target.name]: e.target.value
+    })
+    )
+    console.log(input)
+  }
+  function handleSelect(e){
+    setInput({
+      ...input,
+      type: [...input.type, e.target.value]
+    })
+    console.log(input)
   }
 
+  const [errors, setErrors] = React.useState({})
+
   return (
-    <form>
+    <form onSubmit={handleSubmit} >
       <label>Name: </label>
       <input name='name' value={input.name} onChange={handleInputChange} />
+      {/* {errors.name && <p>{errors.name}</p>} */}
+      <p style={{ visibility: errors.name ? "visible" : "hidden" }}>
+            {errors.name}
+          </p>
       <br />
 
       <label>HP: </label>
-      <input name='hp' type="number" value={input.hp} onChange={handleInputChange} />
+      <input name='hp' type="number" value={input.hp} onChange={handleInputChange} min={0} max={1000} />
+      {errors.hp && <p>{errors.hp}</p>}
       <br />
 
       <label>Attack: </label>
@@ -80,8 +130,7 @@ export default function Form() {
       <br />
 
       <label>Type: </label>
-      {/* <input list='weight' name='weight' value={input.weight} onChange={handleInputChange} /> */}
-      <input list='type' name='type' value={input.type} onChange={handleInputChange} />
+      {/* <input list='type' name='type' value={input.type} onChange={handleInputChange} />
       <datalist id="type">
         <option value="normal" />
         <option value="fighting" />
@@ -103,10 +152,42 @@ export default function Form() {
         <option value="fairy" />
         <option value="unknown" />
         <option value="shadow" />
-      </datalist>
+      </datalist> */}
+      <br />
+
+      <label>Normal</label>
+      <input type='checkbox' name='type' value='normal' onChange={handleSelect} />
+      <label>Fighting</label>
+      <input type='checkbox' name='type' value='fighting' onChange={handleSelect}/>
+      <label>Flying</label>
+      <input type='checkbox' name='type' value='flying' onChange={handleSelect}/>
+      <label>Poison</label>
+      <input type='checkbox' name='type' value='poison' onChange={handleSelect}/>
+      <label>Ground</label>
+      <input type='checkbox' name='type' value='ground' onChange={handleSelect}/>
+      <label>Rock</label>
+      <input type='checkbox' name='type' value='rock' onChange={handleSelect}/>
+      <label>Bug</label>
+      <input type='checkbox' name='type' value='bug' onChange={handleSelect}/>
+      <label>Ghost</label>
+      <input type='checkbox' name='type' value='ghost' onChange={handleSelect}/>
+      <label>Steel</label>
+      <input type='checkbox' name='type' value='steel' onChange={handleSelect}/>
+      <label>Fire</label>
+      <input type='checkbox' name='type' value='fire' onChange={handleSelect}/>
+      <label>Water</label>
+      <input type='checkbox' name='type' value='water' onChange={handleSelect}/>
+      <label>Grass</label>
+      <input type='checkbox' name='type' value='grass' onChange={handleSelect}/>
       
 
-      <button onClick={handleSubmit}></button>
+      {/* <button onClick={handleSubmit}>Submit</button> */}
+      <button
+          disabled={!input.name || Object.keys(errors).length > 0}
+          onSubmit={handleSubmit}
+        >
+          Enviar
+        </button>
     </form>
   )
 }

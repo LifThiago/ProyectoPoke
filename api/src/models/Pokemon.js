@@ -61,9 +61,13 @@ module.exports = (sequelize) => {
       }
     },
 
+    // type: {
+    //   type: DataTypes.STRING,
+    //   defaultValue: 'normal'
+    // },
     type: {
-      type: DataTypes.TEXT,
-      defaultValue: 'normal'
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      defaultValue: ['normal']
     },
 
     createdDb: {

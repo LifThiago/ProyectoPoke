@@ -1,0 +1,14 @@
+.card_link{
+    text-decoration: none;
+    font-size: 35px;
+}
+
+.card{
+    border: 1px solid red;
+    width: 250px;
+}
+
+.card_img{
+    border: 1px solid black;
+    height: 250px;
+}
