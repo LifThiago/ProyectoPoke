@@ -7,7 +7,7 @@ export default function Card({name, img, types, id}) {
     <div className='card' >
         <Link to={`/detail/${id}`} className='card_link' >{name}</Link>
         {/* <h2 className='card_types' > Types: {types}</h2> */}
-        <h2>Types: {types.map(t => <h2>{t}</h2>)}</h2>
+        <h2>Types: {types.map(t => <p>{t}</p>)}</h2>
         {/* {
           types.map(t => <h2>{t}</h2>)
         } */}
