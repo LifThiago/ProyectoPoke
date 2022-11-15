@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { sortByStorage, getAllPokemons, getTypes, sortByAttack, sortByName, sortByType } from '../../Redux/actions'
 import Card from '../Card/Card'
 import { capitalizeFirstLetter } from '../Form/controller'
+import Paginado from '../Paginado/Paginado'
 
 export default function Home() {
   const dispatch = useDispatch()
@@ -13,14 +14,20 @@ export default function Home() {
     dispatch(getTypes())
   }, [dispatch])
   const [order, setOrder] = useState('')
-
   const allPokemons = useSelector((state) => state.allPokemons)
   const allTypes = useSelector((state) => state.types)
-  let filterPokemons = allPokemons
-  // const pokemon = useSelector((state) => state.pokemon)
-  console.log(allPokemons)
-  // console.log(filterPokemons)
+  
+  const [currentPage, setCurrentPage] = useState(1)
+  const [pokemonsPerPage, setPokemonsPerPage] = useState(12)
+  const indexOfLastPokemon = currentPage * pokemonsPerPage  // 12
+  const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage  // 0
+  const currentPokemons = allPokemons.slice(indexOfFirstPokemon, indexOfLastPokemon)
 
+  const paginado = (pageNumber) => {
+    setCurrentPage(pageNumber)
+  }
+
+  console.log(allPokemons)
 
   function handleStore(e){
     dispatch(sortByStorage(e.target.value))
@@ -91,19 +98,38 @@ export default function Home() {
           })}
         </select>
       </div>
+
+      <Paginado
+      pokemonsPerPage={pokemonsPerPage}
+      allPokemons={allPokemons.length}
+      paginado={paginado}
+      />
       
-      <div>
+      {/* <div>
         {
           allPokemons.length === 0 ? (
             <h1>Loading...</h1>
           ) : (
             allPokemons.map(p => {
               return (
-                <Card name={p.name} img={p.img} types={p.type} key={p.id} id={p.id} />
+                <Link to={`/detail/${p.id}`} >
+                  <Card name={p.name} img={p.img} types={p.type} key={p.id} id={p.id} />
+                </Link>
               )
             })
           )
         }
+      </div> */}
+      <div>
+        {currentPokemons?.map(p => {
+          return (
+            <div>
+              <Link to={`/detail/${p.id}`} >
+                  <Card name={p.name} img={p.img} types={p.type} key={p.id} id={p.id} />
+                </Link>
+            </div>
+          )
+        })}
       </div>
     </div>
   )

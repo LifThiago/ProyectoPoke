@@ -59,7 +59,7 @@ export default function Form() {
   }
 
   function handleSelect(e){
-    console.log(e.target.checked)
+    // console.log(e.target.checked)
       setInput({
         ...input,
         type: [...input.type, e.target.value]
@@ -69,8 +69,21 @@ export default function Form() {
           ...input,
           type: [...input.type, e.target.value]
         })
-      )  
-    console.log(input)
+      ) 
+  }
+
+  function handleRefresh(e){
+    e.preventDefault()
+    setInput({
+      ...input,
+      type: []
+    })
+    setErrors(
+      validateForm({
+        ...input,
+        type: []
+      })
+    )
   }
 
   const [errors, setErrors] = React.useState({})
@@ -124,30 +137,34 @@ export default function Form() {
       <br />
 
       {/* Type con checkbox */}
-      <div>
+      {/* <div>
         {allTypes && allTypes.map(
           t => {
             return(
               <>
               <label>{capitalizeFirstLetter(t.name)}</label>
-              <input type='checkbox' name='type' value={t.name} onChange={handleSelect} disabled={false} ></input>
+              <input type='checkbox' name='type' value={t.name} onChange={handleSelect} ></input>
               </>
             )
           }
         )}
-      </div>
+      </div> */}
+      <button onClick={handleRefresh} >Refresh</button>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
 
       {/* Type con option */}
-      {/* <div>
+      <div>
         <select multiple onChange={handleSelect} >
-          <option value='fire' name='type' >Fire</option>
           {allTypes && allTypes.map(t => {
             return (
-              <option name='type' value={t.name} key={t.id} >{t.name}</option>
+              <option name='type' value={t.name} key={t.id} >{capitalizeFirstLetter(t.name)}</option>
             )
           })}
         </select>
-      </div> */}
+      </div>
 
       {errors.type && <p>{errors.type}</p>}
       
