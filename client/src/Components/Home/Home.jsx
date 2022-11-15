@@ -3,16 +3,19 @@ import {useDispatch, useSelector} from 'react-redux'
 import { Link } from 'react-router-dom'
 import { sortByStorage, getAllPokemons, getTypes, sortByAttack, sortByName, sortByType } from '../../Redux/actions'
 import Card from '../Card/Card'
+import { capitalizeFirstLetter } from '../Form/controller'
 
 export default function Home() {
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(getAllPokemons())
+    dispatch(getTypes())
   }, [dispatch])
   const [order, setOrder] = useState('')
 
   const allPokemons = useSelector((state) => state.allPokemons)
+  const allTypes = useSelector((state) => state.types)
   let filterPokemons = allPokemons
   // const pokemon = useSelector((state) => state.pokemon)
   console.log(allPokemons)
@@ -80,13 +83,12 @@ export default function Home() {
         <label>Type</label>
         <select onChange={handleTypes} >
           <option value='none' >None</option>
-          <option value='fighting' >Fighting</option>
-          <option value='flying' >Flying</option>
-          <option value='poison' >Posion</option>
-          <option value='ground' >Ground</option>
-          <option value='rock' >Rock</option>
-          <option value='bug' >Bug</option>
-          <option value='ghost' >Ghost</option>
+          {allTypes && 
+          allTypes.map(t => {
+            return (
+              <option key={t.id} value={t.name} >{capitalizeFirstLetter(t.name)}</option>
+            )
+          })}
         </select>
       </div>
       

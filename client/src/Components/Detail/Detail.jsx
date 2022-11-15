@@ -1,7 +1,8 @@
 import React from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getPokemonById } from '../../Redux/actions'
+import { getAllPokemons, getPokemonById } from '../../Redux/actions'
+import { capitalizeFirstLetter } from '../Form/controller'
 
 export default function Detail(props) {
     console.log(props.match.params)
@@ -24,7 +25,11 @@ export default function Detail(props) {
         <h5>Hp: {pokemon.hp}</h5>
         <h5>Height: {pokemon.height}</h5>
         <h5>Weight: {pokemon.weight}</h5>
-        <h5>Types: {pokemon.type}</h5>
+        <h5>Types: {pokemon.type && pokemon.type.map(t => {
+          return(
+            <p>{capitalizeFirstLetter(t)}</p>
+          )
+        })}</h5>
     </div>
   )
 }

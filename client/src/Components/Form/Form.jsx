@@ -57,17 +57,19 @@ export default function Form() {
     )
     console.log(input)
   }
+
   function handleSelect(e){
-    setInput({
-      ...input,
-      type: [...input.type, e.target.value]
-    })
-    setErrors(
-      validateForm({
+    console.log(e.target.checked)
+      setInput({
         ...input,
         type: [...input.type, e.target.value]
       })
-    )
+      setErrors(
+        validateForm({
+          ...input,
+          type: [...input.type, e.target.value]
+        })
+      )  
     console.log(input)
   }
 
@@ -121,72 +123,31 @@ export default function Form() {
       <label>Type: </label>
       <br />
 
+      {/* Type con checkbox */}
       <div>
         {allTypes && allTypes.map(
           t => {
             return(
               <>
               <label>{capitalizeFirstLetter(t.name)}</label>
-              <input type='checkbox' name='type' value={t.name} onChange={handleSelect} ></input>
+              <input type='checkbox' name='type' value={t.name} onChange={handleSelect} disabled={false} ></input>
               </>
             )
           }
         )}
       </div>
 
+      {/* Type con option */}
       {/* <div>
-      <label>Normal</label>
-      <input type='checkbox' name='type' value='normal' onChange={handleSelect} />
-      <label>Fighting</label>
-      <input type='checkbox' name='type' value='fighting' onChange={handleSelect}/>
-      <label>Flying</label>
-      <input type='checkbox' name='type' value='flying' onChange={handleSelect}/>
-      <label>Poison</label>
-      <input type='checkbox' name='type' value='poison' onChange={handleSelect}/>
-      <label>Ground</label>
-      <input type='checkbox' name='type' value='ground' onChange={handleSelect}/>
-      <label>Rock</label>
-      <input type='checkbox' name='type' value='rock' onChange={handleSelect}/>
-      <label>Bug</label>
-      <input type='checkbox' name='type' value='bug' onChange={handleSelect}/>
-      <label>Ghost</label>
-      <input type='checkbox' name='type' value='ghost' onChange={handleSelect}/>
-      <label>Steel</label>
-      <input type='checkbox' name='type' value='steel' onChange={handleSelect}/>
-      <label>Fire</label>
-      <input type='checkbox' name='type' value='fire' onChange={handleSelect}/>
-      <label>Water</label>
-      <input type='checkbox' name='type' value='water' onChange={handleSelect}/>
-      <label>Grass</label>
-      <input type='checkbox' name='type' value='grass' onChange={handleSelect}/>
-      <label>Electric</label>
-      <input type='checkbox' name='type' value='electric' onChange={handleSelect}/>
-      <label>Electric</label>
-      <input type='checkbox' name='type' value='electric' onChange={handleSelect}/>
-      <label>Psychic</label>
-      <input type='checkbox' name='type' value='psychic' onChange={handleSelect}/>
-      <label>Ice</label>
-      <input type='checkbox' name='type' value='ice' onChange={handleSelect}/>
-      <label>Dragon</label>
-      <input type='checkbox' name='type' value='dragon' onChange={handleSelect}/>
-      <label>Dark</label>
-      <input type='checkbox' name='type' value='dark' onChange={handleSelect}/>
-      <label>Fairy</label>
-      <input type='checkbox' name='type' value='fairy' onChange={handleSelect}/>
-      <label>Unknown</label>
-      <input type='checkbox' name='type' value='unknown' onChange={handleSelect}/>
-      <label>Shadow</label>
-      <input type='checkbox' name='type' value='shadow' onChange={handleSelect}/>
+        <select multiple onChange={handleSelect} >
+          <option value='fire' name='type' >Fire</option>
+          {allTypes && allTypes.map(t => {
+            return (
+              <option name='type' value={t.name} key={t.id} >{t.name}</option>
+            )
+          })}
+        </select>
       </div> */}
-
-      {/* <select>
-        <option value='none' >None</option>
-        {allTypes.length && allTypes.map((e) => {
-          return (
-            <option key={e.id} name={e.name} >{capitalizeFirstLetter(e.name)}</option>
-          )
-        })}
-      </select> */}
 
       {errors.type && <p>{errors.type}</p>}
       

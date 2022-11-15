@@ -1,3 +1,6 @@
+import axios from 'axios'
+import { useHistory } from 'react-router-dom'
+
 export function validateString(string) {
     let check = /^[a-zA-Z\s]*$/;
     if(check.test(string)) {
@@ -55,6 +58,8 @@ export function validateForm(input){
     }
     if(input.type.length === 0){
       errors.type = 'You must select at least 1 type'
+    } else if(input.type.length > 2){
+      errors.type = 'solo2'
     }
     return errors
   }
