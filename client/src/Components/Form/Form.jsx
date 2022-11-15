@@ -177,7 +177,8 @@ export default function Form() {
       <br />
 
       <label>Type: </label>
-      {/* <input list='type' name='type' value={input.type} onChange={handleInputChange} />
+      {/* <div>
+      <input list='type' name='type' value={input.type} onChange={handleInputChange} />
       <datalist id="type">
         <option value="normal" />
         <option value="fighting" />
@@ -199,7 +200,8 @@ export default function Form() {
         <option value="fairy" />
         <option value="unknown" />
         <option value="shadow" />
-      </datalist> */}
+      </datalist>
+      </div> */}
       <br />
 
       <div>

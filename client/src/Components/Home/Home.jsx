@@ -1,7 +1,7 @@
 import React, { useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import { Link } from 'react-router-dom'
-import { filterByStorage, getAllPokemons, sortByAttack, sortByName } from '../../Redux/actions'
+import { filterByStorage, getAllPokemons, getTypes, sortByAttack, sortByName } from '../../Redux/actions'
 import Card from '../Card/Card'
 
 export default function Home() {
@@ -26,7 +26,6 @@ export default function Home() {
   function handleAttack(e){
     dispatch(sortByAttack(e.target.value))
     setOrder(e.target.value)
-    console.log(e.target.value)
     console.log(allPokemons)
   }
   function handleName(e) {
@@ -34,6 +33,13 @@ export default function Home() {
     setOrder(e.target.value)
     console.log(allPokemons)
   }
+  async function handleTypes(e){
+    if(types.length < 20){
+      dispatch(getTypes())
+    }
+    console.log(types)
+  }
+  let types = useSelector((state) => state.types)
 
 
   return (
@@ -69,6 +75,17 @@ export default function Home() {
       </div>
 
       <div>
+        <label>Type</label>
+        <select onChange={handleTypes} >
+          <option value='ver' >Ver</option>
+          <option value='ver2' >Ver2</option>
+          {/* {types.length === 0 ? <h2>No hay</h2>: 
+          types.map(t => <option value={t} >{t}</option>)
+          } */}
+        </select>
+      </div>
+      
+      <div>
         {
           allPokemons.length === 0 ? (
             <h1>Loading...</h1>
@@ -81,25 +98,6 @@ export default function Home() {
           )
         }
       </div>
-
-      {/* <div>
-        {
-          pokemon.name !== undefined ? (
-            <Card name={pokemon.name} img={pokemon.img} types={pokemon.types} id={pokemon.id} key={pokemon.id} />
-          ) : (
-            allPokemons.length === 0 ? (
-              <h1>Loading...</h1>
-            ) : (
-              allPokemons.map(p => {
-                return (
-                  <Card name={p.name} img={p.img} types={p.type} key={p.id} id={p.id} />
-                )
-              })
-            )
-          )
-        }
-      </div> */}
-
     </div>
   )
 }

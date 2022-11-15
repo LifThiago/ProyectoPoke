@@ -32,8 +32,11 @@ const rootReducer = (state = initialState, action) => {
             let allPokemonsFilteredDb = state.pokemonsFilter
 
             const filterByStorage =
-            action.payload === 'inDb' ? state.pokemonsFilter.filter(p => p.createdDb) :
-            state.pokemonsFilter.filter(p => !p.createdDb);
+            action.payload === 'inDb'
+            ? allPokemonsFilteredDb.filter(p => p.createdDb)
+            : action.payload === 'inApi'
+            ? allPokemonsFilteredDb.filter(p => !p.createdDb)
+            : action.payload === 'all' && allPokemonsFilteredDb
             return{
                 ...state,
                 allPokemons: 
@@ -42,25 +45,25 @@ const rootReducer = (state = initialState, action) => {
         }
 
         case SORT_BY_ATTACK: {
-            let pokemonsSorted = state.pokemonsFilter
-            const sortByAttack =
-            action.payload === 'asc' ? state.pokemonsFilter.sort(function(a,b){return a.attack - b.attack}) : 
-            state.pokemonsFilter.sort(function(a ,b){return b.attack - a.attack});
+            let sortByAttack = 
+            action.payload === 'asc'
+            ? state.allPokemons.sort(function(a, b){return a.attack - b.attack})
+            : state.allPokemons.sort(function(a ,b){return b.attack - a.attack});
             return {
                 ...state,
-                allPokemons: action.payload === 'random' ? pokemonsSorted : sortByAttack
+                allPokemons: sortByAttack
             }
         }
         
         case SORT_BY_NAME: {
             let sortByName = 
-            action.payload === 'asc' ? 
-            state.pokemonsFilter.sort((a,b) => a.name.localeCompare(b.name)) :
-            state.pokemonsFilter.sort((a,b) => b.name.localeCompare(a.name))
+            action.payload === 'asc'
+            ? state.allPokemons.sort((a,b) => a.name.localeCompare(b.name))
+            : state.allPokemons.sort((a,b) => b.name.localeCompare(a.name))
             return {
                 ...state,
                 allPokemons: sortByName
-            }
+            };
         }
 
         case GET_TYPES: {
