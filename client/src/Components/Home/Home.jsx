@@ -1,7 +1,7 @@
 import React, { useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import { Link } from 'react-router-dom'
-import { filterByStorage, getAllPokemons, getTypes, sortByAttack, sortByName } from '../../Redux/actions'
+import { sortByStorage, getAllPokemons, getTypes, sortByAttack, sortByName, sortByType } from '../../Redux/actions'
 import Card from '../Card/Card'
 
 export default function Home() {
@@ -20,7 +20,7 @@ export default function Home() {
 
 
   function handleStore(e){
-    dispatch(filterByStorage(e.target.value))
+    dispatch(sortByStorage(e.target.value))
     setOrder(e.target.value)
   }
   function handleAttack(e){
@@ -37,7 +37,9 @@ export default function Home() {
     if(types.length < 20){
       dispatch(getTypes())
     }
-    console.log(types)
+    dispatch(sortByType(e.target.value))
+    setOrder(e.target.value)
+    console.log(allPokemons)
   }
   let types = useSelector((state) => state.types)
 
@@ -77,11 +79,14 @@ export default function Home() {
       <div>
         <label>Type</label>
         <select onChange={handleTypes} >
-          <option value='ver' >Ver</option>
-          <option value='ver2' >Ver2</option>
-          {/* {types.length === 0 ? <h2>No hay</h2>: 
-          types.map(t => <option value={t} >{t}</option>)
-          } */}
+          <option value='none' >None</option>
+          <option value='fighting' >Fighting</option>
+          <option value='flying' >Flying</option>
+          <option value='poison' >Posion</option>
+          <option value='ground' >Ground</option>
+          <option value='rock' >Rock</option>
+          <option value='bug' >Bug</option>
+          <option value='ghost' >Ghost</option>
         </select>
       </div>
       

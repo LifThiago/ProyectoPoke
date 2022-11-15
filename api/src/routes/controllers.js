@@ -128,15 +128,16 @@ async function getTypes() {
     let typesAPi = await axios('https://pokeapi.co/api/v2/type')
     let arrayTypes = typesAPi.data.results.map(e => {return {name: e.name}})
 
-    await Type.bulkCreate(arrayTypes)
-
-    let typesDb = await Type.findAll({
-        // include: {
-        //     model: Pokemon,
+    let typesExist = await Type.findAll()
+    if(typesExist.length > 0){
+        return typesExist
+    } else {
+        await Type.bulkCreate(arrayTypes)
+        let typesDb = await Type.findAll({
             attributes: ['id', 'name']
-        // }
-    });
-    return typesDb
+        })
+        return typesDb
+    }
 }
 
 // async function createPokemon(values) {

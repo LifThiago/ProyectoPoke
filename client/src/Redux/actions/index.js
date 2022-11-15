@@ -3,10 +3,11 @@ import axios from "axios";
 export const GET_ALL_POKEMONS = 'GET_ALL_POKEMONS';
 export const GET_POKEMON_BY_ID = 'GET_POKEMON_BY_ID';
 export const SEARCH_POKEMON = 'SEARCH_POKEMON';
-export const FILTER_BY_STORAGE = 'FILTER_BY_STORAGE';
+export const SORT_BY_STORAGE = 'SORT_BY_STORAGE';
 export const SORT_BY_ATTACK = 'SORT_BY_ATTACK';
 export const SORT_BY_NAME = 'SORT_BY_NAME';
-export const GET_TYPES = 'GET_TYPES'
+export const GET_TYPES = 'GET_TYPES';
+export const SORT_BY_TYPE = 'SORT_BY_TYPE'
 
 export function getAllPokemons() {
     return async function(dispatch){
@@ -38,9 +39,9 @@ export function searchPokemon(name){
     }
 }
 
-export function filterByStorage(store){
+export function sortByStorage(store){
         return {
-            type: FILTER_BY_STORAGE,
+            type: SORT_BY_STORAGE,
             payload: store
         }
 }
@@ -59,12 +60,19 @@ export function sortByName(name){
     }
 }
 
+export function sortByType(type){
+    return {
+        type: SORT_BY_TYPE,
+        payload: type
+    }
+}
+
 export function getTypes(){
     return async function(dispatch){
         const types = await axios.get('http://localhost:3001/types')
         return dispatch({
             type: GET_TYPES,
-            payload: types
+            payload: types.data
         })
     }
 }

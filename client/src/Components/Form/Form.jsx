@@ -1,69 +1,12 @@
 import React, { useEffect } from 'react'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
-
-function validateString(string) {
-  let check = /^[a-zA-Z\s]*$/;
-  if(check.test(string)) {
-    return true
-  } else {
-    return false
-  }
-}
-function validateUrl(value) {
-  return /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:[/?#]\S*)?$/i.test(value);
-}
-function validateForm(input){
-  let errors = {};
-  if(validateString(input.name) !== true){
-    errors.name = 'The name only accepts numbers'
-  }
-  if(!input.name) {
-    errors.name = 'The pokemon must have a name'
-  }
-  if(input.hp.length === 0){
-    errors.hp = 'HP must be greater than 0'
-  } else if(input.hp > 999) {
-    errors.hp = 'HP must be less than 1000'
-  }
-  if(input.attack.length === 0){
-    errors.attack = 'Attack must be greater than 0'
-  } else if(input.attack > 999){
-    errors.attack = 'Attack must be less than 1000'
-  }
-  if(input.defense.length === 0){
-    errors.defense = 'Defense must be greater than 0'
-  } else if(input.defense > 999){
-    errors.defense = 'Defense must be less than 1000'
-  }
-  if(input.speed.length === 0){
-    errors.speed = 'Speed must be greater than 0'
-  } else if(input.speed > 999){
-    errors.speed = 'Speed must be less than 1000'
-  }
-  if(input.height.length === 0){
-    errors.height = 'Height must be greater than 0'
-  } else if(input.height > 25){
-    errors.height = 'Height must be less than 25'
-  }
-  if(input.weight.length === 0){
-    errors.weight = 'Weight must be greater than 0'
-  } else if(input.weight > 5000){
-    errors.weight = 'Weight must be less than 5000'
-  }
-  if(input.img.length === 0) {
-    errors.img = 'You must enter an URL'
-  } else if(validateUrl(input.img) !== true){
-    errors.img = 'You must enter a valid image URL'
-  }
-  if(input.type.length === 0){
-    errors.type = 'You must select at least 1 type'
-  }
-  return errors
-}
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllPokemons, getTypes } from '../../Redux/actions';
+import { capitalizeFirstLetter, validateForm } from './controller';
 
 export default function Form() {
-  
+  const dispatch = useDispatch()
   const history = useHistory()
 
   const [input, setInput] = React.useState({
@@ -77,11 +20,10 @@ export default function Form() {
     img: '',
     type: []
   })
-  // useEffect(() => {
-  //     setErrors(
-  //       validateForm(input)
-  //     )
-  // }, input)
+  useEffect(() => {
+      dispatch(getTypes())
+  }, [dispatch])
+  let allTypes = useSelector((state) => state.types)
   
   function handleSubmit(e) {
     e.preventDefault()
@@ -177,34 +119,22 @@ export default function Form() {
       <br />
 
       <label>Type: </label>
-      {/* <div>
-      <input list='type' name='type' value={input.type} onChange={handleInputChange} />
-      <datalist id="type">
-        <option value="normal" />
-        <option value="fighting" />
-        <option value="flying" />
-        <option value="poison" />
-        <option value="ground" />
-        <option value="rock" />
-        <option value="bug" />
-        <option value="ghost" />
-        <option value="steel" />
-        <option value="fire" />
-        <option value="water" />
-        <option value="grass" />
-        <option value="electric" />
-        <option value="psychic" />
-        <option value="ice" />
-        <option value="dragon" />
-        <option value="dark" />
-        <option value="fairy" />
-        <option value="unknown" />
-        <option value="shadow" />
-      </datalist>
-      </div> */}
       <br />
 
       <div>
+        {allTypes && allTypes.map(
+          t => {
+            return(
+              <>
+              <label>{capitalizeFirstLetter(t.name)}</label>
+              <input type='checkbox' name='type' value={t.name} onChange={handleSelect} ></input>
+              </>
+            )
+          }
+        )}
+      </div>
+
+      {/* <div>
       <label>Normal</label>
       <input type='checkbox' name='type' value='normal' onChange={handleSelect} />
       <label>Fighting</label>
@@ -229,7 +159,35 @@ export default function Form() {
       <input type='checkbox' name='type' value='water' onChange={handleSelect}/>
       <label>Grass</label>
       <input type='checkbox' name='type' value='grass' onChange={handleSelect}/>
-      </div>
+      <label>Electric</label>
+      <input type='checkbox' name='type' value='electric' onChange={handleSelect}/>
+      <label>Electric</label>
+      <input type='checkbox' name='type' value='electric' onChange={handleSelect}/>
+      <label>Psychic</label>
+      <input type='checkbox' name='type' value='psychic' onChange={handleSelect}/>
+      <label>Ice</label>
+      <input type='checkbox' name='type' value='ice' onChange={handleSelect}/>
+      <label>Dragon</label>
+      <input type='checkbox' name='type' value='dragon' onChange={handleSelect}/>
+      <label>Dark</label>
+      <input type='checkbox' name='type' value='dark' onChange={handleSelect}/>
+      <label>Fairy</label>
+      <input type='checkbox' name='type' value='fairy' onChange={handleSelect}/>
+      <label>Unknown</label>
+      <input type='checkbox' name='type' value='unknown' onChange={handleSelect}/>
+      <label>Shadow</label>
+      <input type='checkbox' name='type' value='shadow' onChange={handleSelect}/>
+      </div> */}
+
+      {/* <select>
+        <option value='none' >None</option>
+        {allTypes.length && allTypes.map((e) => {
+          return (
+            <option key={e.id} name={e.name} >{capitalizeFirstLetter(e.name)}</option>
+          )
+        })}
+      </select> */}
+
       {errors.type && <p>{errors.type}</p>}
       
       <button disabled={!input.name || Object.keys(errors).length > 0} onSubmit={handleSubmit} >Submit</button>
