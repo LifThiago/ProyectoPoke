@@ -58,8 +58,22 @@ export default function Form() {
     console.log(input)
   }
 
-  function handleSelect(e){
-    // console.log(e.target.checked)
+  // function handleSelect(e){
+  //     setInput({
+  //       ...input,
+  //       type: [...input.type, e.target.value]
+  //     })
+  //     setErrors(
+  //       validateForm({
+  //         ...input,
+  //         type: [...input.type, e.target.value]
+  //       })
+  //     ) 
+  // }
+
+  function handleCheck(e){
+    let checked = e.target.checked
+    if(checked){
       setInput({
         ...input,
         type: [...input.type, e.target.value]
@@ -69,7 +83,21 @@ export default function Form() {
           ...input,
           type: [...input.type, e.target.value]
         })
-      ) 
+      )
+    }
+    if(!checked){
+      setInput({
+        ...input,
+        type: input.type.filter((t) => t !== e.target.value)
+      })
+      setErrors(
+        validateForm({
+          ...input,
+          type: input.type.filter((t) => t !== e.target.value)
+        })
+      )
+    }
+    console.log(input)
   }
 
   function handleRefresh(e){
@@ -137,18 +165,18 @@ export default function Form() {
       <br />
 
       {/* Type con checkbox */}
-      {/* <div>
+      <div>
         {allTypes && allTypes.map(
           t => {
             return(
               <>
               <label>{capitalizeFirstLetter(t.name)}</label>
-              <input type='checkbox' name='type' value={t.name} onChange={handleSelect} ></input>
+              <input type='checkbox' name={t.name} value={t.name} onChange={handleCheck} ></input>
               </>
             )
           }
         )}
-      </div> */}
+      </div>
       <button onClick={handleRefresh} >Refresh</button>
       <br/>
       <br/>
@@ -156,7 +184,7 @@ export default function Form() {
       <br/>
 
       {/* Type con option */}
-      <div>
+      {/* <div>
         <select multiple onChange={handleSelect} >
           {allTypes && allTypes.map(t => {
             return (
@@ -164,7 +192,7 @@ export default function Form() {
             )
           })}
         </select>
-      </div>
+      </div> */}
 
       {errors.type && <p>{errors.type}</p>}
       

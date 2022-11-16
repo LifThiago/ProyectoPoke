@@ -5,9 +5,9 @@ export default function Paginado({pokemonsPerPage, allPokemons, paginado}) {
     const pageNumbers = []
 
     for(let i=0; i<=Math.ceil(allPokemons/pokemonsPerPage); i++){
-        console.log(i)
+        // console.log(i)
         pageNumbers.push(i)
-        console.log(pageNumbers)
+        // console.log(pageNumbers)
     }
 
 
