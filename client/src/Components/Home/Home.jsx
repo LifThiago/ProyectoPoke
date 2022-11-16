@@ -5,6 +5,7 @@ import { sortByStorage, getAllPokemons, getTypes, sortByAttack, sortByName, sort
 import Card from '../Card/Card'
 import { capitalizeFirstLetter } from '../Form/controller'
 import Paginado from '../Paginado/Paginado'
+import './Home.css'
 
 export default function Home() {
   const dispatch = useDispatch()
@@ -124,7 +125,7 @@ export default function Home() {
         {currentPokemons?.map(p => {
           return (
             <div>
-              <Link to={`/detail/${p.id}`} >
+              <Link to={`/detail/${p.id}`} className='link' >
                   <Card name={p.name} img={p.img} types={p.type} key={p.id} id={p.id} />
                 </Link>
             </div>

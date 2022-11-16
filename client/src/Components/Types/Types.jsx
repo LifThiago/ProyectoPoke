@@ -1,4 +1,5 @@
 import React from 'react'
+import './Types.css'
 import { capitalizeFirstLetter } from '../Form/controller'
 
 export default function Types({types}) {
@@ -103,7 +104,7 @@ function renderSwitch(type){
     <div>
       {types.map(t => {
         return(
-          <h1>{renderSwitch(t)}</h1>
+          <h1 className='type_card' >{renderSwitch(t)}</h1>
         )
       })}
     </div>

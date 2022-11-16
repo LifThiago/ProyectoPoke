@@ -1,14 +1,17 @@
-.card_link{
-    text-decoration: none;
-    font-size: 35px;
-}
-
 .card{
-    border: 1px solid red;
-    width: 250px;
+    /* border: 1px solid red; */
+    width: 300px;
+    background-color: #9694a9;
+    border-radius: 3px;
 }
 
 .card_img{
-    border: 1px solid black;
-    height: 250px;
+    /* border: 1px solid black; */
+    background-color: #bfdefb;
+    height: 275px;
+    width: 275px;
+    border-radius: 5px;
+}
+.type{
+    border: 1px solid blue;
 }

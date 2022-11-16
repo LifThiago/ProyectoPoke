@@ -20,10 +20,11 @@ async function getPokemonsApi() {
     try {
         let arrayPokemons = []
     
-        const firstCallApi = await axios('https://pokeapi.co/api/v2/pokemon')
-        // const firstCallApi = await axios('https://pokeapi.co/api/v2/pokemon?limit=10')
         // Hago el "fetch" a la api
-        const secondCallApi = await axios(firstCallApi.data.next)
+        // const firstCallApi = await axios('https://pokeapi.co/api/v2/pokemon') // Nos trae 20 pokemon
+        const firstCallApi = await axios('https://pokeapi.co/api/v2/pokemon?limit=5')
+        
+        const secondCallApi = await axios(firstCallApi.data.next) // Nos traemos los siguientes 20. 40 en total
         // return firstCallApi.data.results.map(e => e.url)
     
         const firstPokemonUrl = await firstCallApi.data.results.map((e) => e.url)
