@@ -16,7 +16,7 @@ export function validateUrl(value) {
 export function validateForm(input){
     let errors = {};
     if(validateString(input.name) !== true){
-      errors.name = 'The name only accepts numbers'
+      errors.name = "The name doesn't accept numbers"
     }
     if(!input.name) {
       errors.name = 'The pokemon must have a name'
@@ -59,7 +59,7 @@ export function validateForm(input){
     if(input.type.length === 0){
       errors.type = 'You must select at least 1 type'
     } else if(input.type.length > 2){
-      errors.type = 'solo2'
+      errors.type = 'Your pokemon cannot belong to more than 2 types'
     }
     return errors
   }

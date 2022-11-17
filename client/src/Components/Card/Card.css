@@ -4,6 +4,11 @@
     background-color: #9090a8;
     border-radius: 10px;
     /* border: 1px solid #585357 */
+    transition: 1s;
+}
+.card:hover{
+    transform: scale(90%);
+    transition: 1s;
 }
 
 .card_img{

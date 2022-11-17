@@ -16,6 +16,10 @@ export default function Detail(props) {
     const pokemon = useSelector((state) => state.pokemon)
     console.log(pokemon)
 
+  if(pokemon.id && pokemon.id.length > 4){
+    pokemon.id = pokemon.id.substring(0,4)
+  }
+
   return (
     <div className='detail_total'>
       <div className="detail_container">
@@ -28,7 +32,7 @@ export default function Detail(props) {
       <div className="detail_left">
         <div className="detail_div">
           <h5 className='detail_always' >ID</h5>
-          <h5 className='detail_info' >{pokemon.id}</h5>
+          <h5 className='detail_info detail_id' >{pokemon.id}</h5>
         </div>
         <div className="detail_div">
           <h5 className='detail_always' >ATTACK</h5>

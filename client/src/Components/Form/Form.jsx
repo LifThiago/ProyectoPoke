@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllPokemons, getTypes } from '../../Redux/actions';
 import { capitalizeFirstLetter, validateForm } from './controller';
+import './Form.css'
 
 export default function Form() {
   const dispatch = useDispatch()
@@ -117,13 +118,10 @@ export default function Form() {
   const [errors, setErrors] = React.useState({})
 
   return (
-    <form onSubmit={handleSubmit} >
-      <label>Name: </label>
-      <input name='name' value={input.name} onChange={handleInputChange} />
+    <form onSubmit={handleSubmit} className='form_container' >
+      {/* <label>Name: </label> */}
+      <input name='name' value={input.name} onChange={handleInputChange} className={errors.name ? 'form_nameError' : 'form_name'} placeholder="Pokemon's name" />
       {errors.name && <p>{errors.name}</p>}
-      {/* <p style={{ visibility: errors.name ? "visible" : "hidden" }}>
-            {errors.name}
-          </p> */}
       <br />
 
       <label>HP: </label>

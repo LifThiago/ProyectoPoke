@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import { searchPokemon } from '../../Redux/actions'
+import './Searchbar.css'
 
 export default function Searchbar() {
 
@@ -27,11 +28,13 @@ export default function Searchbar() {
     }
 
   return (
-    <div>
-        <Link to='/' > Volver al inicio </Link>
-        <form onSubmit={handleSubmit} />
-        <input type='text' placeholder='Search in pokedex' value={name} onChange={handleChange} />
-        <button type='submit' onClick={handleSubmit} >Search!</button>
+    <div className='nav_container' >
+        <Link to='/' className='nav_link' >HENRYCHU</Link>
+        <div className="nav_search">
+            <form onSubmit={handleSubmit} />
+            <input type='text' placeholder='Search in Pokedex' value={name} onChange={handleChange} className='nav_input'/>
+            <button type='submit' onClick={handleSubmit} className='nav_button' >Go</button>
+        </div>
     </div>
   )
 }
