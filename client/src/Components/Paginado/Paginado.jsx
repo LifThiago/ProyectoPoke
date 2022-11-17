@@ -13,7 +13,6 @@ export default function Paginado({pokemonsPerPage, allPokemons, paginado}) {
 
   return (
     <nav>
-        <h1>hola</h1>
         <ul>
             { pageNumbers && 
             pageNumbers.map(number =>{

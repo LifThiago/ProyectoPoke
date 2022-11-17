@@ -1,17 +1,47 @@
 .card{
     /* border: 1px solid red; */
     width: 300px;
-    background-color: #9694a9;
-    border-radius: 3px;
+    background-color: #9090a8;
+    border-radius: 10px;
+    /* border: 1px solid #585357 */
 }
 
 .card_img{
-    /* border: 1px solid black; */
-    background-color: #bfdefb;
     height: 275px;
     width: 275px;
-    border-radius: 5px;
+    border-radius: 10px;
+    background: 
+    repeating-conic-gradient(#cae1f9 0% 25%, #8dc9f2 0% 50%) 
+      50% / 20px 20px;
+    box-shadow: inset 10px 8px rgba(98, 124, 143, 0.65), 7px 7px #9c9eaa; /* #627c8f */
+    /* box-shadow: 0px 0px 10px 8px #9c9eaa; */
 }
-.type{
-    border: 1px solid blue;
+.card_upper{
+    background-color: #707078;
+    border-radius: 10px 10px 0 0;
+    padding-bottom: 10px;
+    border: 4px solid #585357;
+}
+
+.card_name{
+    display: flex;
+    /* text-align: center; */
+    justify-content: center;
+    /* align-items: center; */
+    /* align-self: center; */
+    margin-bottom: 10px;
+    margin-top: 10px;
+    /* padding-top: 10px; */
+    background: -webkit-linear-gradient(#f2f1f6, #f2c27a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 2px #4f5457;
+}
+
+.card_type{
+    border: 4px solid #585357;
+    border-radius: 0 0 10px 10px;
+    display: flex;
+    align-self: center;
+    justify-content: center;
 }

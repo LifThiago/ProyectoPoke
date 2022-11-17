@@ -7,9 +7,14 @@ import './Card.css'
 export default function Card({name, img, types, id}) {
   return (
     <div className='card' >
-        <h1>{capitalizeFirstLetter(name)}</h1>
+      <div className='card_upper' >
+        {/* <h1 className='card_name' >{capitalizeFirstLetter(name)}</h1> */}
+        <h1 className='card_name' >{name.toUpperCase()}</h1>
         <img src={img} alt={name} className='card_img' />
-        <Types types={types} className='type'></Types>
+      </div>
+      <div className='card_type' >
+        <Types types={types} ></Types>
+      </div>
     </div>
   )
 }
