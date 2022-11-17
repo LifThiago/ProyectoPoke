@@ -2,3 +2,20 @@
     text-decoration: none;
     color: black;
 }
+
+
+.home_pokemons{
+    display: flex;
+    grid-template-columns: auto auto auto auto;
+    gap: 10px;
+    flex-direction: row;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.home_bg{
+    object-fit: cover;
+}

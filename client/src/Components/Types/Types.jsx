@@ -92,21 +92,11 @@ function renderSwitch(type){
 }
 
   return (
-    // <div>
-    //   <h1>Types: </h1>
-    //     {types.map(t => {
-    //         return(
-    //             <h2>{capitalizeFirstLetter(t)}</h2>
-    //         )
-    //     })}
-    // </div>
-
     <div>
       <h1 className='types_type' >TYPE</h1>
       <div className='types_div' >
       {types.map(t => {
         return(
-          // <h2 className='type_card' >{renderSwitch(t)}</h2>
           <h2 className={t} >{t.toUpperCase()}</h2>
         )
       })}

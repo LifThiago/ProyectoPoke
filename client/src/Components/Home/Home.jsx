@@ -6,6 +6,7 @@ import Card from '../Card/Card'
 import { capitalizeFirstLetter } from '../Form/controller'
 import Paginado from '../Paginado/Paginado'
 import './Home.css'
+import pokemonMap from '../../Images/pokemonMap.png'
 
 export default function Home() {
   const dispatch = useDispatch()
@@ -57,6 +58,7 @@ export default function Home() {
 
   return (
     <div>Home
+      {/* <img src={pokemonMap} className='home_bg' /> */}
       <br/>
       <Link to='/create' >Create pokemon</Link>
 
@@ -106,22 +108,7 @@ export default function Home() {
       paginado={paginado}
       />
       
-      {/* <div>
-        {
-          allPokemons.length === 0 ? (
-            <h1>Loading...</h1>
-          ) : (
-            allPokemons.map(p => {
-              return (
-                <Link to={`/detail/${p.id}`} >
-                  <Card name={p.name} img={p.img} types={p.type} key={p.id} id={p.id} />
-                </Link>
-              )
-            })
-          )
-        }
-      </div> */}
-      <div>
+      <div className='home_pokemons' >
         {currentPokemons?.map(p => {
           return (
             <div>
