@@ -1,3 +1,8 @@
+html{
+  background-image: linear-gradient(0deg, #f7f9b0 16.67%, #f0f6f4 16.67%, #f0f6f4 33.33%, #e2e2e2 33.33%, #e2e2e2 50%, #f7f9b0 50%, #f7f9b0 66.67%, #f0f6f4 66.67%, #f0f6f4 83.33%, #e2e2e2 83.33%, #e2e2e2 100%);
+  background-size: 30.00px 30.00px;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,6 +10,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-text-stroke: 0px white;
 }
 
 code {

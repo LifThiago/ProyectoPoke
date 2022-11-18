@@ -43,6 +43,7 @@ export default function Form() {
       type: []
     })
     history.push('/home')
+    throw alert('Pokemon created succesfully')
   }
 
   function handleInputChange(e) {

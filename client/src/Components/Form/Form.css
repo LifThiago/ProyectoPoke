@@ -96,9 +96,9 @@
     justify-content: center;
     text-decoration: none;
     color: #fafafa;
-    background-color: #9fe491;
+    background-color: #5ecf81;
     border-radius: 5px;
-    border: 2px solid #89abad;
+    border: 2px solid #496859;
     width: 100px;
     height: 40px;
     font-size: 22px;
@@ -110,11 +110,13 @@
 .form_button:disabled{
     /* transform: scale(80%); */
     transition: 0.5s;
-    opacity: 0.4;
+    opacity: 0.3;
+    background-color: #df0005;
+    border-color: #8f0103;
 }
 .form_button:disabled:hover{
     transition: 0.5s;
-    cursor: default;
+    cursor: not-allowed;
 }
 .form_back{
     display: flex;
@@ -122,9 +124,11 @@
     justify-content: center;
     text-decoration: none;
     color: #fafafa;
-    background-color: #9fe491;
+    /* background-color: #9fe491; */
+    background-color: #5ecf81;
+    /* border: 2px solid #89abad; */
+    border: 2px solid #496859;
     border-radius: 5px;
-    border: 2px solid #89abad;
     width: 100px;
     height: 40px;
     font-size: 22px;

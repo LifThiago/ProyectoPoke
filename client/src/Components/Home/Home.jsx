@@ -6,17 +6,23 @@ import Card from '../Card/Card'
 import { capitalizeFirstLetter } from '../Form/controller'
 import Paginado from '../Paginado/Paginado'
 import './Home.css'
-import pokemonMap from '../../Images/pokemonMap.png'
+import spinBall from '../../Images/spinBall.gif'
 
 export default function Home() {
   const dispatch = useDispatch()
 
+  // let allPokemons = useSelector((state) => state.allPokemons)
   useEffect(() => {
     dispatch(getAllPokemons())
-    dispatch(getTypes())
   }, [dispatch])
-  const [order, setOrder] = useState('')
+
+  useEffect(() => {
+    dispatch(getTypes())
+  }, [])
+
+  // allPokemons = useSelector((state) => state.allPokemons)
   const allPokemons = useSelector((state) => state.allPokemons)
+  const [order, setOrder] = useState('')
   const allTypes = useSelector((state) => state.types)
   
   const [currentPage, setCurrentPage] = useState(1)
@@ -24,6 +30,11 @@ export default function Home() {
   const indexOfLastPokemon = currentPage * pokemonsPerPage  // 12
   const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage  // 0
   const currentPokemons = allPokemons.slice(indexOfFirstPokemon, indexOfLastPokemon)
+
+  function handleRefresh(){
+    window.location.reload(true)
+    // throw alert('ho')
+  }
 
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber)
@@ -106,6 +117,8 @@ export default function Home() {
       </div>
     </div>
 
+    <button onClick={handleRefresh} className='home_refresh'>REFRESH</button>
+
       {/* <Paginado
       pokemonsPerPage={pokemonsPerPage}
       allPokemons={allPokemons.length}
@@ -125,7 +138,8 @@ export default function Home() {
             </div>
           )
         })): (
-          <h1>Loading...</h1>
+          // <h1>Loading...</h1>
+          <img src={spinBall} className='home_loading_img'/>
         )}
       </div>
       <Paginado

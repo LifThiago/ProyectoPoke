@@ -50,6 +50,28 @@
     transition: 0.5s;
 }
 
+.home_refresh{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #9fe491;
+    border-radius: 5px;
+    border: 2px solid #89abad;
+    width: 105px;
+    height: 30px;
+    font-size: 18px;
+    /* -webkit-text-stroke: 0.05px #89abad; */
+    transition: 0.5s;
+    margin-top: 10px;
+}
+.home_refresh:hover{
+    cursor: pointer;
+    transform: scale(105%);
+    transition: 0.5s;
+}
+
 
 .home_options{
     display: flex;
@@ -89,3 +111,8 @@
 /* .select:focus{
     background-color: red;
 } */
+
+.home_loading_img{
+    /* border: 1px solid red; */
+    height: 350px;
+}
