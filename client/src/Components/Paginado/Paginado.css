@@ -1,0 +1,35 @@
+.pag_container{
+    display: flex;
+    /* justify-content: center;
+    align-content: center; */
+    border: 1px solid red;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+}
+
+.pag_numbs{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    color: #eafaef;
+    font-size: 22px;
+    width: 28px;
+    height: 28px;
+    border-radius: 5px;
+    background-color: #a2c5a7;
+    border: 2px solid #80a09b;
+    margin: 12px;
+}
+/* .pag_ul{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    border: 1px solid red;
+} */

@@ -31,22 +31,13 @@ router.get('/pokeapi', async (req, res, next) => { // Ruta para los pokemon de A
 });
 
 router.get('/pokemons', async (req, res) => { //Ruta para todos los pokemon
-    // const { name } = req.query
-    //     if (name) {
-    //         try {
-    //             let pokemon = await getPokemonByName(name)
-    //             res.status(200).send(pokemon)
-    //         } catch (error) {
-    //             res.send(error)
-    //         }
-    //     } else {
             try {
                 let allPokes = await getAllPokemons()
+                //Ver si puedo hacer para que primero devuelva 20 y despues los otros, asi no tarda tanto
                 res.status(200).send(allPokes)
             } catch (error) {
                 res.send(error)
             }
-        // }
 })
 
 router.get('/pokemons/:id', async (req, res) => {

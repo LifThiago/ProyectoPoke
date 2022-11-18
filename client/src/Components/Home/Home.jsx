@@ -115,7 +115,7 @@ export default function Home() {
     </div>
       
       <div className='home_pokemons' >
-        {currentPokemons?.map(p => {
+        {currentPokemons.length > 0 ? (currentPokemons.map(p => {
           return (
             <div>
               <Link to={`/detail/${p.id}`} className='home_cards' >
@@ -123,7 +123,9 @@ export default function Home() {
                 </Link>
             </div>
           )
-        })}
+        })): (
+          <h1>Loading...</h1>
+        )}
       </div>
     </div>
   )

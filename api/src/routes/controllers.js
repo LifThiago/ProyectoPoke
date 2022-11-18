@@ -2,17 +2,21 @@ const {Pokemon, Type } = require('../db.js')
 const axios = require("axios");
 
 async function getPokemonsDb() {
-    let pokemonsDb = await Pokemon.findAll({
-        // include: {
-        //     model: Type,
-            attributes: ['id', 'name', 'img', 'type', 'createdDb', 'attack'],
-            // attributes: ['id', 'name', 'img'],
-        //     through: {
-        //         attributes: [type]
-        //     }
-        // }
-    });
-    return pokemonsDb
+    try {
+        let pokemonsDb = await Pokemon.findAll({
+            // include: {
+            //     model: Type,
+                attributes: ['id', 'name', 'img', 'type', 'createdDb', 'attack'],
+                // attributes: ['id', 'name', 'img'],
+            //     through: {
+            //         attributes: [type]
+            //     }
+            // }
+        });
+        return pokemonsDb
+    } catch (error) {
+        return error + 'error getPokemonsDb'
+    }
 };
 
 
@@ -21,17 +25,19 @@ async function getPokemonsApi() {
         let arrayPokemons = []
     
         // Hago el "fetch" a la api
-        // const firstCallApi = await axios('https://pokeapi.co/api/v2/pokemon') // Nos trae 20 pokemon
-        const firstCallApi = await axios('https://pokeapi.co/api/v2/pokemon?limit=5')
+        const firstCallApi = await axios('https://pokeapi.co/api/v2/pokemon') // Nos trae 20 pokemon
+        // const firstCallApi = await axios('https://pokeapi.co/api/v2/pokemon?limit=7')
         
         const secondCallApi = await axios(firstCallApi.data.next) // Nos traemos los siguientes 20. 40 en total
-        // return firstCallApi.data.results.map(e => e.url)
     
         const firstPokemonUrl = await firstCallApi.data.results.map((e) => e.url)
         const SecondPokemonUrl = await secondCallApi.data.results.map((e) => e.url)
     
         const allPokemonUrl = await firstPokemonUrl.concat(SecondPokemonUrl)
         const allPokemonsPromises = await Promise.all(allPokemonUrl)
+        // const firstPokemonPromise = await Promise.all(firstPokemonUrl)
+        // const seconfPokemonPromise = await Promise.all(SecondPokemonUrl)
+        // const allPokemonsPromises = await firstPokemonPromise.concat(seconfPokemonPromise)
         
         for(let i = 0; i < allPokemonsPromises.length; i++) {
             const url = await axios(allPokemonsPromises[i]);
@@ -45,7 +51,7 @@ async function getPokemonsApi() {
         } 
         return arrayPokemons;
     } catch (error) {
-        return error
+        return error + 'error getPokemonsApi'
     }
 }
 
@@ -57,7 +63,7 @@ async function getAllPokemons() {
         let allPokes = await pokemonsApi.concat(pokemonsDb)
         return allPokes
     } catch (error) {
-        return error
+        return error +'getAllPokemons'
     }
 }
 
@@ -111,22 +117,27 @@ async function getPokemonById(value){
             }
         }
     } catch (error) {
-        return error
+        return error + 'getPokemonById'
     }
 }
 
 async function getPokemonByName(name) {
-    let pokemon = await Pokemon.findOne({
-        where: {
-            name: name
-        }
-    });
-    if(!pokemon) return getPokemonById(name)
-    return pokemon
+    try {
+        let pokemon = await Pokemon.findOne({
+            where: {
+                name: name
+            }
+        });
+        if(!pokemon) return getPokemonById(name)
+        return pokemon
+    } catch (error) {
+        return error + 'getPokemonByName'
+    }
 }
 
 async function getTypes() {
-    let typesAPi = await axios('https://pokeapi.co/api/v2/type')
+    try {
+        let typesAPi = await axios('https://pokeapi.co/api/v2/type')
     let arrayTypes = typesAPi.data.results.map(e => {return {name: e.name}})
 
     let typesExist = await Type.findAll()
@@ -138,6 +149,9 @@ async function getTypes() {
             attributes: ['id', 'name']
         })
         return typesDb
+    }
+    } catch (error) {
+        return error + 'getTypes'
     }
 }
 

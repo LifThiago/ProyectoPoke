@@ -85,6 +85,9 @@
     width: 175px;
     margin-top: 5px;
 }
+.select:hover{
+    cursor: pointer;
+}
 /* .select:focus{
     background-color: red;
 } */
