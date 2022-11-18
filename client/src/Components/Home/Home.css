@@ -1,8 +1,9 @@
-.link{
+.home_cards{
     text-decoration: none;
     color: black;
+    /* background-image: linear-gradient(0deg, #faf7b2 16.67%, #f0f0f0 16.67%, #f0f0f0 33.33%, #f8f8f6 33.33%, #f8f8f6 50%, #faf7b2 50%, #faf7b2 66.67%, #f0f0f0 66.67%, #f0f0f0 83.33%, #f8f8f6 83.33%, #f8f8f6 100%);
+    background-size: 36.00px 36.00px; */
 }
-
 
 .home_pokemons{
     display: flex;
@@ -16,6 +17,74 @@
     align-items: flex-start;
 }
 
-.home_bg{
-    object-fit: cover;
+.home_functions{
+    display: flex;
+    margin-top: 0px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* background-image: linear-gradient(0deg, #faf7b2 16.67%, #f0f0f0 16.67%, #f0f0f0 33.33%, #f8f8f6 33.33%, #f8f8f6 50%, #faf7b2 50%, #faf7b2 66.67%, #f0f0f0 66.67%, #f0f0f0 83.33%, #f8f8f6 83.33%, #f8f8f6 100%);
+    background-size: 36.00px 36.00px; */
 }
+
+.home_link{
+    text-decoration: none;
+}
+.home_create{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 12px;
+    width: 100px;
+    color: #ebfeea;
+    background-color: #9fe491;
+    border-radius: 5px;
+    border: 2px solid #89abad;
+    width: 300px;
+    height: 50px;
+    font-size: 25px;
+    -webkit-text-stroke: 1px #89abad;
+    transition: 0.5s;
+}
+.home_create:hover{
+    transform: scale(105%);
+    transition: 0.5s;
+}
+
+
+.home_options{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 1000px;
+}
+.options{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fdffb7;
+    /* background-color: #f7f8d8; */
+    width: 275px;
+    border-radius: 5px;
+    height: 75px;
+    border: 2px solid #496859;
+    margin: 10px;
+}
+.label{
+    width: 275px;
+    border-radius: 5px;
+    font-size: 17px;
+    padding-top: 4px;
+}
+.select{
+    background-color: #5ecf81;
+    border-radius: 5px;
+    border: 2px solid #496859;
+    width: 175px;
+    margin-top: 5px;
+}
+/* .select:focus{
+    background-color: red;
+} */

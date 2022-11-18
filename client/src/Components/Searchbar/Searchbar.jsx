@@ -32,7 +32,7 @@ export default function Searchbar() {
         <Link to='/' className='nav_link' >HENRYCHU</Link>
         <div className="nav_search">
             <form onSubmit={handleSubmit} />
-            <input type='text' placeholder='Search in Pokedex' value={name} onChange={handleChange} className='nav_input'/>
+            <input type='text' placeholder='SEARCH IN POKÉDEX' value={name} onChange={handleChange} className='nav_input'/>
             <button type='submit' onClick={handleSubmit} className='nav_button' >Go</button>
         </div>
     </div>

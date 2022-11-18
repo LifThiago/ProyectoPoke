@@ -57,42 +57,45 @@ export default function Home() {
 
 
   return (
-    <div>Home
+    <div className='home_container'>
       {/* <img src={pokemonMap} className='home_bg' /> */}
       <br/>
-      <Link to='/create' >Create pokemon</Link>
+    <div className='home_functions'>
 
-      <div>
-        <label>Show pokemons in...</label>
-        <select onChange={handleStore} >
+      <Link to='/create' className='home_link'><h5 className='home_create' >CREATE POKEMON</h5></Link>
+
+    <div className="home_options">
+      <div className='options'>
+        <label className='label'>SHOW POKEMONS</label>
+        <select onChange={handleStore} className='select' >
           <option value='all' >All</option>
-          <option value='inApi' >API</option>
-          <option value='inDb' >DB</option>
+          <option value='inApi' >Existing</option>
+          <option value='inDb' >Created</option>
         </select>
       </div>
 
-      <div>
-        <label>Attack</label>
-        <select onChange={handleAttack} >
+      <div className='options'>
+        <label className='label' >ATTACK</label>
+        <select onChange={handleAttack} className='select' >
           <option value='random' >Random</option>
-          <option value='asc' >ASC</option>
-          <option value='des' >DES</option>
+          <option value='asc' >More powerful</option>
+          <option value='des' >Less powerful</option>
         </select>
       </div>
 
-      <div>
-        <label>Name</label>
-        <select onChange={handleName} >
+      <div className='options'>
+        <label className='label'>NAME</label>
+        <select onChange={handleName} className='select' >
           <option value='random' >Random</option>
-          <option value='asc' >ASC</option>
-          <option value='des' >DES</option>
+          <option value='asc' >A-Z</option>
+          <option value='des' >Z-A</option>
         </select>
       </div>
 
-      <div>
-        <label>Type</label>
-        <select onChange={handleTypes} >
-          <option value='none' >None</option>
+      <div className='options'>
+        <label className='label'>TYPE</label>
+        <select onChange={handleTypes} className='select' >
+          <option value='none' >All</option>
           {allTypes && 
           allTypes.map(t => {
             return (
@@ -101,18 +104,21 @@ export default function Home() {
           })}
         </select>
       </div>
+    </div>
 
       <Paginado
       pokemonsPerPage={pokemonsPerPage}
       allPokemons={allPokemons.length}
       paginado={paginado}
+      className='home_paginado'
       />
+    </div>
       
       <div className='home_pokemons' >
         {currentPokemons?.map(p => {
           return (
             <div>
-              <Link to={`/detail/${p.id}`} className='link' >
+              <Link to={`/detail/${p.id}`} className='home_cards' >
                   <Card name={p.name} img={p.img} types={p.type} key={p.id} id={p.id} />
                 </Link>
             </div>
