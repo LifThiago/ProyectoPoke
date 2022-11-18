@@ -1,0 +1,139 @@
+.form_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.form_div{
+    display: flex;
+    flex-direction: row;
+}
+
+.form_options{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fdffb7;
+    /* background-color: #f7f8d8; */
+    width: 275px;
+    border-radius: 5px;
+    height: 75px;
+    border: 2px solid #496859;
+    margin: 10px;
+    transition: 0.5s;
+}
+.options_error{
+    height: 100px;
+    transition: 0.5s;
+}
+
+.label{
+    width: 275px;
+    border-radius: 5px;
+    font-size: 17px;
+    padding-top: 4px;
+    transition: 0.5s;
+}
+.input{
+    background-color: #5ecf81;
+    border-radius: 5px;
+    border: 2px solid #496859;
+    width: 175px;
+    margin-top: 5px;
+    transition: 0.5s;
+}
+.input:hover{
+    cursor: pointer;
+}
+.disable{
+    background-color: #df0005;
+    border-color: #8f0103;
+    color: #fafafa;
+    transition: 0.5s;
+}
+.disable::placeholder{
+    color: #fafafa;
+    transition: 0.5s;
+}
+
+.error{
+    color:#df0005;
+    transition: 0.5s;
+}
+
+
+.form_type{
+    width: 875px;
+    height: 125px;
+    transition: 0.5s;
+}
+.form_type_errors{
+    height: 160px;
+    transition: 0.5s;
+    /* border-color: #df0005; */
+}
+.form_checkboxes{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.form_checkbox{
+    margin: 10px;
+}
+
+.form_buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    /* border: 1px solid red; */
+    width: 400px;
+}
+.form_button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #fafafa;
+    background-color: #9fe491;
+    border-radius: 5px;
+    border: 2px solid #89abad;
+    width: 100px;
+    height: 40px;
+    font-size: 22px;
+    transition: 0.5s;
+}
+.form_button:hover{
+    cursor: pointer;
+}
+.form_button:disabled{
+    /* transform: scale(80%); */
+    transition: 0.5s;
+    opacity: 0.4;
+}
+.form_button:disabled:hover{
+    transition: 0.5s;
+    cursor: default;
+}
+.form_back{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #fafafa;
+    background-color: #9fe491;
+    border-radius: 5px;
+    border: 2px solid #89abad;
+    width: 100px;
+    height: 40px;
+    font-size: 22px;
+    transition: 0.5s;
+    text-decoration: none;
+}
+.form_back:hover{
+    cursor: pointer;
+}
+.link_back{
+    text-decoration: none;
+}

@@ -68,25 +68,25 @@ export default function Home() {
       <div className='options'>
         <label className='label'>SHOW POKEMONS</label>
         <select onChange={handleStore} className='select' >
-          <option value='all' >All</option>
-          <option value='inApi' >Existing</option>
-          <option value='inDb' >Created</option>
+          <option value='all' >ALL</option>
+          <option value='inApi' >EXISTING</option>
+          <option value='inDb' >CREATED</option>
         </select>
       </div>
 
       <div className='options'>
         <label className='label' >ATTACK</label>
         <select onChange={handleAttack} className='select' >
-          <option value='random' >Random</option>
-          <option value='asc' >More powerful</option>
-          <option value='des' >Less powerful</option>
+          <option value='random' >RANDOM</option>
+          <option value='asc' >LESS POWERFUL</option>
+          <option value='des' >MORE POWERFUL</option>
         </select>
       </div>
 
       <div className='options'>
         <label className='label'>NAME</label>
         <select onChange={handleName} className='select' >
-          <option value='random' >Random</option>
+          <option value='random' >RANDOM</option>
           <option value='asc' >A-Z</option>
           <option value='des' >Z-A</option>
         </select>
@@ -95,23 +95,24 @@ export default function Home() {
       <div className='options'>
         <label className='label'>TYPE</label>
         <select onChange={handleTypes} className='select' >
-          <option value='none' >All</option>
+          <option value='none' >ALL</option>
           {allTypes && 
           allTypes.map(t => {
             return (
-              <option key={t.id} value={t.name} >{capitalizeFirstLetter(t.name)}</option>
+              <option key={t.id} value={t.name} >{t.name.toUpperCase()}</option>
             )
           })}
         </select>
       </div>
     </div>
 
-      <Paginado
+      {/* <Paginado
       pokemonsPerPage={pokemonsPerPage}
       allPokemons={allPokemons.length}
       paginado={paginado}
+      currentPage={currentPage}
       className='home_paginado'
-      />
+      /> */}
     </div>
       
       <div className='home_pokemons' >
@@ -127,6 +128,13 @@ export default function Home() {
           <h1>Loading...</h1>
         )}
       </div>
+      <Paginado
+      pokemonsPerPage={pokemonsPerPage}
+      allPokemons={allPokemons.length}
+      paginado={paginado}
+      currentPage={currentPage}
+      className='home_paginado'
+      />
     </div>
   )
 }

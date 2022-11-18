@@ -35,15 +35,13 @@
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    font-size: 12px;
-    width: 100px;
     color: #ebfeea;
     background-color: #9fe491;
     border-radius: 5px;
     border: 2px solid #89abad;
     width: 300px;
     height: 50px;
-    font-size: 25px;
+    font-size: 28px;
     -webkit-text-stroke: 1px #89abad;
     transition: 0.5s;
 }

@@ -8,6 +8,7 @@
 }
 .card:hover{
     transform: scale(90%);
+    /* transform: translateY(99%); */
     transition: 1s;
 }
 

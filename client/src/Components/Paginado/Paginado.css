@@ -2,8 +2,8 @@
     display: flex;
     /* justify-content: center;
     align-content: center; */
-    border: 1px solid red;
-    justify-content: space-between;
+    /* border: 1px solid red; */
+    justify-content: center;
     align-items: center;
     align-content: center;
     text-align: center;
@@ -23,7 +23,28 @@
     background-color: #a2c5a7;
     border: 2px solid #80a09b;
     margin: 12px;
+    transition: 0.5s;
 }
+.pag_numbs:hover{
+    cursor: pointer;
+}
+.current{
+    transform: scale(125%);
+    background-color: #a0c8f0;  
+    color: #eafaef;
+    border-color: #67676f;
+    transition: 0.5s;
+}
+
+/* Version más oscura */
+/* .current{
+    transform: scale(125%);
+    background-color: #4a5c4d;  
+    color: #eafaef;
+    border-color: #374644;
+    transition: 0.5s;
+} */
+
 /* .pag_ul{
     list-style: none;
     display: flex;

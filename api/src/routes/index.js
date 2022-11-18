@@ -64,8 +64,12 @@ router.get('/pokemons/:id', async (req, res) => {
 // })
 
 router.get('/types', async (req, res) => {
-    let result = await getTypes()
-    res.send(result)
+    try {
+        let result = await getTypes()
+        res.send(result)
+    } catch (error) {
+        res.send(error)
+    }
 })
 
 router.post('/pokemons', async (req, res) => {

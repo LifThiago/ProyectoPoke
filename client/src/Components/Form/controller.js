@@ -19,7 +19,7 @@ export function validateForm(input){
       errors.name = "The name doesn't accept numbers"
     }
     if(!input.name) {
-      errors.name = 'The pokemon must have a name'
+      errors.name = 'Your pokemon must have a name'
     }
     if(input.hp.length === 0){
       errors.hp = 'HP must be greater than 0'

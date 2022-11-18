@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import axios from 'axios'
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllPokemons, getTypes } from '../../Redux/actions';
 import { capitalizeFirstLetter, validateForm } from './controller';
@@ -118,83 +118,93 @@ export default function Form() {
   const [errors, setErrors] = React.useState({})
 
   return (
-    <form onSubmit={handleSubmit} className='form_container' >
-      {/* <label>Name: </label> */}
-      <input name='name' value={input.name} onChange={handleInputChange} className={errors.name ? 'form_nameError' : 'form_name'} placeholder="Pokemon's name" />
-      {errors.name && <p>{errors.name}</p>}
+  <form onSubmit={handleSubmit} className='form_container' >
+    <div className='form_div'>
+      <div className={errors.name ? 'form_options options_error' : 'form_options'}>
+        <label className='label'>NAME:</label>
+        <input name='name' value={input.name} onChange={handleInputChange} placeholder="Pokemon's name" className={errors.name ? 'input disable' : 'input'} />
+        {errors.name && <p className='error' >{errors.name}</p>}
+      </div>
       <br />
 
-      <label>HP: </label>
-      <input name='hp' type="number" value={input.hp} onChange={handleInputChange} min={0} max={1000} />
-      {errors.hp && <p>{errors.hp}</p>}
+      <div className={errors.hp ? 'form_options options_error' : 'form_options'}>
+        <label className='label'>HP:</label>
+        <input name='hp' type="number" value={input.hp} onChange={handleInputChange} min={0} max={1000} className={errors.hp ? 'input disable' : 'input'} />
+        {errors.hp && <p className='error' >{errors.hp}</p>}
+      </div>
       <br />
 
-      <label>Attack: </label>
-      <input name='attack' type='number' value={input.attack} onChange={handleInputChange} />
-      {errors.attack && <p>{errors.attack}</p>}
+      <div className={errors.attack ? 'form_options options_error' : 'form_options'}>
+        <label className='label'>ATTACK:</label>
+        <input name='attack' type='number' value={input.attack} onChange={handleInputChange} className={errors.attack ? 'input disable' : 'input'} />
+        {errors.attack && <p className='error' >{errors.attack}</p>}
+      </div>
+      <br />
+    </div>
+
+    <div className='form_div'>
+      <div className={errors.defense ? 'form_options options_error' : 'form_options'}>
+        <label className='label'>DEFENSE:</label>
+        <input name='defense' type='number' value={input.defense} onChange={handleInputChange} className={errors.defense ? 'input disable' : 'input'} />
+        {errors.defense && <p className='error' >{errors.defense}</p>}
+      </div>
       <br />
 
-      <label>Defense: </label>
-      <input name='defense' type='number' value={input.defense} onChange={handleInputChange} />
-      {errors.defense && <p>{errors.defense}</p>}
+      <div className={errors.speed ? 'form_options options_error' : 'form_options'}>
+        <label className='label'>SPEED:</label>
+        <input name='speed' type='number' value={input.speed} onChange={handleInputChange} className={errors.speed ? 'input disable' : 'input'} />
+        {errors.speed && <p className='error' >{errors.speed}</p>}
+      </div>
       <br />
 
-      <label>Speed: </label>
-      <input name='speed' type='number' value={input.speed} onChange={handleInputChange} />
-      {errors.speed && <p>{errors.speed}</p>}
+      <div className={errors.height ? 'form_options options_error' : 'form_options'}>
+        <label className='label'>HEIGHT: </label>
+        <input name='height' type='number' value={input.height} onChange={handleInputChange} className={errors.height ? 'input disable' : 'input'} />
+        {errors.height && <p>{errors.height}</p>}
+      </div>
+      <br />
+    </div>
+
+    <div className="form_div">
+      <div className={errors.weight ? 'form_options options_error' : 'form_options'}>
+      <label className='label'>WEIGHT: </label>
+      <input name='weight' type='number' value={input.weight} onChange={handleInputChange} className={errors.weight ? 'input disable' : 'input'} />
+      {errors.weight && <p className='error' >{errors.weight}</p>}
+      </div>
       <br />
 
-      <label>Height: </label>
-      <input name='height' type='number' value={input.height} onChange={handleInputChange} />
-      {errors.height && <p>{errors.height}</p>}
+      <div className={errors.img ? 'form_options options_error' : 'form_options'}>
+        <label className='label'>IMAGE: </label>
+        <input name='img' type='url' value={input.img} onChange={handleInputChange} placeholder="Pokemon's image" className={errors.img ? 'input disable' : 'input input_img'} />
+        {errors.img && <p className='error' >{errors.img}</p>}
+      </div>
       <br />
+    </div>
 
-      <label>Weight: </label>
-      <input name='weight' type='number' value={input.weight} onChange={handleInputChange} />
-      {errors.weight && <p>{errors.weight}</p>}
-      <br />
-
-      <label>Image: </label>
-      <input name='img' type='url' value={input.img} onChange={handleInputChange} />
-      {errors.img && <p>{errors.img}</p>}
-      <br />
-
-      <label>Type: </label>
-      <br />
-
+    <div className={errors.type ? 'form_options options_error form_type form_type_errors' : 'form_options form_type'}>
+      <label className='label'>TYPE: </label>
       {/* Type con checkbox */}
-      <div>
+      <div className='form_checkboxes'>
         {allTypes && allTypes.map(
           t => {
             return(
-              <>
-              <label>{capitalizeFirstLetter(t.name)}</label>
-              <input type='checkbox' name={t.name} value={t.name} onChange={handleCheck} ></input>
-              </>
+              <div className='form_checkbox'>
+              <label className='label' for={t.name}>{capitalizeFirstLetter(t.name)}</label>
+              <input type='checkbox' name={t.name} value={t.name} onChange={handleCheck} className='form_checks' ></input>
+              </div>
             )
           }
         )}
       </div>
-      <button onClick={handleRefresh} >Refresh</button>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-
-      {/* Type con option */}
-      {/* <div>
-        <select multiple onChange={handleSelect} >
-          {allTypes && allTypes.map(t => {
-            return (
-              <option name='type' value={t.name} key={t.id} >{capitalizeFirstLetter(t.name)}</option>
-            )
-          })}
-        </select>
-      </div> */}
-
-      {errors.type && <p>{errors.type}</p>}
+      {errors.type && <p className='error'>{errors.type}</p>}
+    </div>
       
-      <button disabled={!input.name || Object.keys(errors).length > 0} onSubmit={handleSubmit} >Submit</button>
+    <div className="form_buttons">
+      <button disabled={!input.name || Object.keys(errors).length > 0} onSubmit={handleSubmit} className='form_button' >Submit</button>
+      <Link to='/home' className='link_back' >
+        <button className='form_back'>Go back</button>
+      </Link>
+    </div>
     </form>
   )
 }
