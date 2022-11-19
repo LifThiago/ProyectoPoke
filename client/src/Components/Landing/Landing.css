@@ -1,21 +1,28 @@
+@font-face {
+    font-family: 'PokemonLogo';
+    src: url('../../Fonts/PokemonSolid.ttf');
+}
+
+.landing{
+    display: flex;
+    justify-content: center;
+}
+
 .landing_div{
-    background-image: linear-gradient(45deg, #f78055 25%, #ffd28f 25%, #ffd28f 50%, #f78055 50%, #f78055 75%, #ffd28f 75%, #ffd28f 100%);
-    background-size: 56.57px 56.57px;
-    height: 100vh;
-    width: 100%;
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
+    background-color: #0078bf;
+    border-radius: 5px;
+    width: 750px;
+    margin-top: 90px;
 }
 
-.landing_img{
-    position: relative;
-    width: 70%;
-    display: flex;
-    border: 1px solid red;
-    /* height: 100%; */
+.landing_welcome{
+    font-family: 'PokemonLogo';
+    color: #fef806;
+    font-size: 55px;
 }
 
-/* .landing_link{
-    position: absolute;
-    border: 1px solid red;
-} */
+.landing_link{
+    text-decoration: none;
+}
