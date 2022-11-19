@@ -7,7 +7,7 @@
     display: flex;
     justify-content: center;
     background-image: linear-gradient(45deg, #6b54a4 25%, #684a85 25%, #684a85 50%, #6b54a4 50%, #6b54a4 75%, #684a85 75%, #684a85 100%);
-background-size: 56.57px 56.57px;
+    background-size: 56.57px 56.57px;
     height: 100vh;
 }
 
@@ -16,8 +16,8 @@ background-size: 56.57px 56.57px;
     /* justify-content: center; */
     align-items: center;
     flex-direction: column;
-    background-color: #241d36;
-    border: 3px solid #000000;
+    /* background-color: #f8f8f8; */
+    border: 2px solid #706880;
     border-radius: 5px;
     width: 750px;
     height: 200px;
@@ -27,7 +27,7 @@ background-size: 56.57px 56.57px;
 
 .landing_welcome{
     font-family: 'PokemonLogo';
-    color: #edd719;
+    color: #f8ebf4;
     font-size: 55px;
 }
 
