@@ -22,21 +22,12 @@ export default function Paginado({pokemonsPerPage, allPokemons, paginado, curren
 
   return (
     <nav className='pag_container'>
-        {console.log(currentPage)}
-        {/* <ul className='pag_ul'>
-            { pageNumbers && 
-            pageNumbers.map(number =>{
-                return (
-                <li key={number} className='pag_numbs'>
-                    <a onClick={() => paginado(number)} className='pag_numbs' >{number}</a>
-                </li>
-            )})}
-        </ul> */}
+        {/* {console.log(currentPage)} */}
         <button className='prev_next' name='prev' onClick={handleButton} >Prev</button>
         {pageNumbers &&
         pageNumbers.map(number =>{
             return(
-                <button onClick={() => paginado(number)} className={currentPage==number? 'pag_numbs current': 'pag_numbs'} >{number}</button>
+                <button onClick={() => paginado(number)} className={currentPage===number? 'pag_numbs current': 'pag_numbs'} >{number}</button>
             )
         })
     }
