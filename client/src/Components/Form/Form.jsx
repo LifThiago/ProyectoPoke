@@ -30,7 +30,7 @@ export default function Form() {
     e.preventDefault()
     axios.post('https://thiagopokedex.herokuapp.com/pokemons', input)
     .then(res => console.log(res.data))
-    .catch(err => console.log(err))
+    .catch(err => {throw alert(err)})
     setInput({
       name: '',
       hp: 1,

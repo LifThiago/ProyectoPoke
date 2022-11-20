@@ -11,6 +11,14 @@ export default function Paginado({pokemonsPerPage, allPokemons, paginado, curren
         // console.log(pageNumbers)
     }
 
+    function handleButton(e){
+        if(e.target.name === 'prev'){
+            paginado(currentPage - 1)
+        } else {
+            paginado(currentPage + 1)
+        }
+    }
+
 
   return (
     <nav className='pag_container'>
@@ -24,14 +32,15 @@ export default function Paginado({pokemonsPerPage, allPokemons, paginado, curren
                 </li>
             )})}
         </ul> */}
+        <button className='prev_next' name='prev' onClick={handleButton} >Prev</button>
         {pageNumbers &&
         pageNumbers.map(number =>{
             return(
                 <button onClick={() => paginado(number)} className={currentPage==number? 'pag_numbs current': 'pag_numbs'} >{number}</button>
             )
         })
-        
-        }
+    }
+        <button className='prev_next' name='next' onClick={handleButton} >Next</button>
     </nav>
   )
 }

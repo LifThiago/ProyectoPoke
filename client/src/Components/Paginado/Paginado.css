@@ -36,6 +36,26 @@
     transition: 0.5s;
 }
 
+.prev_next{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    color: #eafaef;
+    font-size: 19px;
+    width: 55px;
+    height: 28px;
+    border-radius: 5px;
+    background-color: #a2c5a7;
+    border: 2px solid #80a09b;
+    margin: 12px;
+    transition: 0.5s;
+}
+.prev_next:hover{
+    cursor: pointer;
+}
+
 /* Version más oscura */
 /* .current{
     transform: scale(125%);

@@ -15,7 +15,7 @@ async function getPokemonsDb() {
         });
         return pokemonsDb
     } catch (error) {
-        return error + 'error getPokemonsDb'
+        return error
     }
 };
 
@@ -25,8 +25,8 @@ async function getPokemonsApi() {
         let arrayPokemons = []
     
         // Hago el "fetch" a la api
-        // const firstCallApi = await axios('https://pokeapi.co/api/v2/pokemon') // Nos trae 20 pokemon
-        const firstCallApi = await axios('https://pokeapi.co/api/v2/pokemon?limit=7')
+        const firstCallApi = await axios('https://pokeapi.co/api/v2/pokemon') // Nos trae 20 pokemon
+        // const firstCallApi = await axios('https://pokeapi.co/api/v2/pokemon?limit=7')
         
         const secondCallApi = await axios(firstCallApi.data.next) // Nos traemos los siguientes 20. 40 en total
     
@@ -51,7 +51,7 @@ async function getPokemonsApi() {
         } 
         return arrayPokemons;
     } catch (error) {
-        return error + 'error getPokemonsApi'
+        return error
     }
 }
 
@@ -63,7 +63,7 @@ async function getAllPokemons() {
         let allPokes = await pokemonsApi.concat(pokemonsDb)
         return allPokes
     } catch (error) {
-        return error +'getAllPokemons'
+        throw alert(error)
     }
 }
 
@@ -84,7 +84,8 @@ async function getPokemonByIdApi(value) {
         }
         return pokemon
     } catch (error) {
-        return 'No se encontro un pokemon con ese Id'
+        throw alert('No pokemon was found with that Id')
+        // return 'No se encontro un pokemon con ese Id'
     }
 }
 
@@ -117,7 +118,7 @@ async function getPokemonById(value){
             }
         }
     } catch (error) {
-        return error + 'getPokemonById'
+        throw alert(error)
     }
 }
 
@@ -131,6 +132,7 @@ async function getPokemonByName(name) {
         if(!pokemon) return getPokemonById(name)
         return pokemon
     } catch (error) {
+        throw alert(error)
         return error + 'getPokemonByName'
     }
 }
@@ -151,7 +153,7 @@ async function getTypes() {
         return typesDb
     }
     } catch (error) {
-        return error + 'getTypes'
+        throw alert(error)
     }
 }
 
@@ -201,7 +203,7 @@ async function createPokemon(values) {
         }
 
         if(pokemon[1] === false) {
-            return 'Este pokemon ya existe, elegí otro nombre'
+            throw alert('This pokemon already exists, try another name')
         }
 
         else {
