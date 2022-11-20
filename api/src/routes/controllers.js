@@ -89,18 +89,6 @@ async function getPokemonByIdApi(value) {
     }
 }
 
-// async function getPokemonById(value) {
-//     if(value.length > 15) {
-//         let poke = Pokemon.findOne({
-//             where: {
-//                 id: value
-//             }
-//         })
-//         return poke
-//     } else {
-//     return getPokemonByIdApi(value)
-// }
-// }
 async function getPokemonById(value){
     try {
         if(value.length > 15) {
@@ -157,27 +145,6 @@ async function getTypes() {
     }
 }
 
-// async function createPokemon(values) {
-//     const { name, hp, height, weight, attack, defense, speed, type, img} = values
-//     try {
-
-//         let exist = await axios(`https://pokeapi.co/api/v2/pokemon/${name.toLowerCase().trim()}`)
-//         if(exist) return `El nombre ${name} ya existe en la API, proba con otro nombre`
-
-//     } catch (error) {
-
-//         let pokemon = await Pokemon.create(values)
-
-//         let typesDb = await Type.findAll({
-//             where: {
-//                 name: type
-//             }
-//         })
-
-//         await pokemon.addType(typesDb)
-//         return pokemon
-//     }
-// }
 
 async function createPokemon(values) {
     const { name, hp, height, weight, attack, defense, speed, type, img} = values
@@ -203,7 +170,7 @@ async function createPokemon(values) {
         }
 
         if(pokemon[1] === false) {
-            throw alert('This pokemon already exists, try another name')
+            return 'This pokemon already exists, try another name'
         }
 
         else {

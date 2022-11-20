@@ -29,7 +29,7 @@ export default function Form() {
   function handleSubmit(e) {
     e.preventDefault()
     axios.post('https://thiagopokedex.herokuapp.com/pokemons', input)
-    .then(res => console.log(res.data))
+    // .then(res => {throw alert(res)})
     .catch(err => {throw alert(err)})
     setInput({
       name: '',
