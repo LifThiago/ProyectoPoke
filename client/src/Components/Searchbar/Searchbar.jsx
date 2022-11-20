@@ -29,7 +29,7 @@ export default function Searchbar() {
 
   return (
     <div className='nav_container' >
-        <Link to='/' className='nav_link' >HENRYCHU</Link>
+        <Link to='/' className='nav_link' >MY PROJECT</Link>
         <div className="nav_search">
             <form onSubmit={handleSubmit} />
             <input type='text' placeholder='SEARCH IN POKÉDEX' value={name} onChange={handleChange} className='nav_input'/>

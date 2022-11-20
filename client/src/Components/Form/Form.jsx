@@ -129,7 +129,7 @@ export default function Form() {
       <br />
 
       <div className={errors.hp ? 'form_options options_error' : 'form_options'}>
-        <label className='label'>HP:</label>
+        <label className='label'>LIFE:</label>
         <input name='hp' type="number" value={input.hp} onChange={handleInputChange} min={0} max={1000} className={errors.hp ? 'input disable' : 'input'} />
         {errors.hp && <p className='error' >{errors.hp}</p>}
       </div>

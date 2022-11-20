@@ -22,9 +22,9 @@ export function validateForm(input){
       errors.name = 'Your pokemon must have a name'
     }
     if(input.hp.length === 0){
-      errors.hp = 'HP must be greater than 0'
+      errors.hp = 'Life must be greater than 0'
     } else if(input.hp > 999) {
-      errors.hp = 'HP must be less than 1000'
+      errors.hp = 'Life must be less than 1000'
     }
     if(input.attack.length === 0){
       errors.attack = 'Attack must be greater than 0'
