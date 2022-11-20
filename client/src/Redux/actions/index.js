@@ -9,6 +9,7 @@ export const SORT_BY_NAME = 'SORT_BY_NAME';
 export const GET_TYPES = 'GET_TYPES';
 export const SORT_BY_TYPE = 'SORT_BY_TYPE'
 
+
 export function getAllPokemons() {
     return async function(dispatch){
         const allPokemons = await axios.get('https://thiagopokedex.herokuapp.com/pokemons')
