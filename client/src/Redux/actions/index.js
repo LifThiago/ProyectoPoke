@@ -11,7 +11,7 @@ export const SORT_BY_TYPE = 'SORT_BY_TYPE'
 
 export function getAllPokemons() {
     return async function(dispatch){
-        const allPokemons = await axios.get('http://localhost:3001/pokemons')
+        const allPokemons = await axios.get('https://thiagopokedex.herokuapp.com/pokemons')
         return dispatch({
             type: GET_ALL_POKEMONS,
             payload: allPokemons.data
@@ -21,7 +21,7 @@ export function getAllPokemons() {
 
 export function getPokemonById(id){
     return async function(dispatch){
-        const pokemon = await axios.get(`http://localhost:3001/pokemons/${id}`)
+        const pokemon = await axios.get(`https://thiagopokedex.herokuapp.com/pokemons/${id}`)
         return dispatch({
             type: GET_POKEMON_BY_ID,
             payload: pokemon.data
@@ -31,7 +31,7 @@ export function getPokemonById(id){
 
 export function searchPokemon(name){
     return async function(dispatch){
-        const pokemon = await axios.get(`http://localhost:3001/pokemons/${name}`)
+        const pokemon = await axios.get(`https://thiagopokedex.herokuapp.com/pokemons/${name}`)
         return dispatch({
             type: SEARCH_POKEMON,
             payload: pokemon.data
@@ -69,7 +69,7 @@ export function sortByType(type){
 
 export function getTypes(){
     return async function(dispatch){
-        const types = await axios.get('http://localhost:3001/types')
+        const types = await axios.get('https://thiagopokedex.herokuapp.com/types')
         return dispatch({
             type: GET_TYPES,
             payload: types.data

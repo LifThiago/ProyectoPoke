@@ -28,7 +28,7 @@ export default function Form() {
   
   function handleSubmit(e) {
     e.preventDefault()
-    axios.post('http://localhost:3001/pokemons', input)
+    axios.post('https://thiagopokedex.herokuapp.com/pokemons', input)
     .then(res => console.log(res.data))
     .catch(err => console.log(err))
     setInput({
