@@ -5,7 +5,7 @@ export default function Paginado({pokemonsPerPage, allPokemons, paginado, curren
 
     const pageNumbers = []
 
-    for(let i=1; i<=Math.ceil(allPokemons/pokemonsPerPage); i++){
+    for(var i=1; i<=Math.ceil(allPokemons/pokemonsPerPage); i++){
         // console.log(i)
         pageNumbers.push(i)
         // console.log(pageNumbers)
@@ -23,7 +23,7 @@ export default function Paginado({pokemonsPerPage, allPokemons, paginado, curren
   return (
     <nav className='pag_container'>
         {/* {console.log(currentPage)} */}
-        <button className='prev_next' name='prev' onClick={handleButton} >Prev</button>
+        <button className={currentPage>1 ? ('prev_next') : ('prev_next hid')} name='prev' onClick={handleButton} >Prev</button>
         {pageNumbers &&
         pageNumbers.map(number =>{
             return(
@@ -31,7 +31,7 @@ export default function Paginado({pokemonsPerPage, allPokemons, paginado, curren
             )
         })
     }
-        <button className='prev_next' name='next' onClick={handleButton} >Next</button>
+        <button className={currentPage < pageNumbers.length ? ('prev_next') : ('prev_next hid')} name='next' onClick={handleButton} >Next</button>
     </nav>
   )
 }
