@@ -19,7 +19,6 @@
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 //PRUEBA
-// Ver el PI de GitHub que tengo en Favoritos
  
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
