@@ -9,15 +9,6 @@ import Landing from './Components/Landing/Landing';
 function App() {
   return (
     <div className="App">
-      {/* <Searchbar />
-      <Link to='/' >Volver al inicio</Link>
-      <br />
-      <Link to='/create' >Create</Link>
-      <h1>Henry Pokemon</h1>
-      <Route exact path='/' >
-        <Link to='/home' >Ver pokemon</Link>
-        <br />
-      </Route> */}
 
       <Switch>
         <Route exact path='/'> <Landing /> </Route>
