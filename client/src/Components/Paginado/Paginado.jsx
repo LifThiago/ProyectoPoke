@@ -23,7 +23,7 @@ export default function Paginado({pokemonsPerPage, allPokemons, paginado, curren
   return (
     <nav className='pag_container'>
         {/* {console.log(currentPage)} */}
-        <button className={currentPage>1 ? ('prev_next') : ('prev_next hid')} name='prev' onClick={handleButton} >Prev</button>
+        <button className={currentPage > 1 ? ('prev_next') : ('prev_next hid')} name='prev' onClick={handleButton} >Prev</button>
         {pageNumbers &&
         pageNumbers.map(number =>{
             return(
