@@ -13,6 +13,7 @@ export const SORT_BY_TYPE = 'SORT_BY_TYPE'
 export function getAllPokemons() {
     return async function(dispatch){
         const allPokemons = await axios.get('https://thiagopokedex.herokuapp.com/pokemons')
+        // const allPokemons = await axios.get('https://localhost:3001/pokemons')
         .catch(err => {throw alert(err)})
         return dispatch({
             type: GET_ALL_POKEMONS,
@@ -24,6 +25,7 @@ export function getAllPokemons() {
 export function getPokemonById(id){
     return async function(dispatch){
         const pokemon = await axios.get(`https://thiagopokedex.herokuapp.com/pokemons/${id}`)
+        // const pokemon = await axios.get(`https://localhost:3001/pokemons/${id}`)
         .catch(err => {throw alert('No pokemon was found with that Id or Name')})
         return dispatch({
             type: GET_POKEMON_BY_ID,
@@ -35,6 +37,7 @@ export function getPokemonById(id){
 export function searchPokemon(name){
     return async function(dispatch){
         const pokemon = await axios.get(`https://thiagopokedex.herokuapp.com/pokemons/${name}`)
+        // const pokemon = await axios.get(`https://localhost:3001/pokemons/${name}`)
         .catch(err => {throw alert('No pokemon was found with that Id or Name')})
         return dispatch({
             type: SEARCH_POKEMON,
@@ -74,6 +77,7 @@ export function sortByType(type){
 export function getTypes(){
     return async function(dispatch){
         const types = await axios.get('https://thiagopokedex.herokuapp.com/types')
+        // const types = await axios.get('https://localhost:3001/types')
         .catch(err => {throw alert(err)})
         return dispatch({
             type: GET_TYPES,
