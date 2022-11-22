@@ -60,7 +60,7 @@ export default function Form() {
     console.log(input)
   }
 
-
+  
   function handleCheck(e){
     let checked = e.target.checked
     if(checked){
@@ -178,8 +178,8 @@ export default function Form() {
           t => {
             return(
               <div className='form_checkbox'>
-                <label className='label' for={t.name}>{capitalizeFirstLetter(t.name)}</label>
-                <input type='checkbox' name={t.name} value={t.name} onChange={handleCheck} className='form_checks' ></input>
+              <label className='label' for={t.name}>{capitalizeFirstLetter(t.name)}</label>
+              <input type='checkbox' name={t.name} value={t.name} onChange={handleCheck} className='form_checks' ></input>
               </div>
             )
           }
