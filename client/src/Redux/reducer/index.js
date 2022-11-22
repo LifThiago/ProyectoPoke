@@ -4,7 +4,7 @@ const initialState = {
     allPokemons: [],
     pokemon: {},
     pokemonsFilter: [],
-    pokemonsPage: [],
+    // pokemonsPage: [],
     types: []
 };
 
@@ -15,7 +15,7 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 allPokemons: action.payload,
                 pokemonsFilter: action.payload,
-                pokemonsPage: action.payload
+                // pokemonsPage: action.payload
             }
 
         case GET_POKEMON_BY_ID:
@@ -69,7 +69,7 @@ const rootReducer = (state = initialState, action) => {
         }
 
         case SORT_BY_TYPE: {
-            const pokemonsType = state.pokemonsPage
+            const pokemonsType = state.pokemonsFilter
 
             const typeFilter =
             action.payload === 'none'
