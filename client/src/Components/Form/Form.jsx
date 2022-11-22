@@ -60,18 +60,6 @@ export default function Form() {
     console.log(input)
   }
 
-  // function handleSelect(e){
-  //     setInput({
-  //       ...input,
-  //       type: [...input.type, e.target.value]
-  //     })
-  //     setErrors(
-  //       validateForm({
-  //         ...input,
-  //         type: [...input.type, e.target.value]
-  //       })
-  //     ) 
-  // }
 
   function handleCheck(e){
     let checked = e.target.checked
@@ -190,8 +178,8 @@ export default function Form() {
           t => {
             return(
               <div className='form_checkbox'>
-              <label className='label' for={t.name}>{capitalizeFirstLetter(t.name)}</label>
-              <input type='checkbox' name={t.name} value={t.name} onChange={handleCheck} className='form_checks' ></input>
+                <label className='label' for={t.name}>{capitalizeFirstLetter(t.name)}</label>
+                <input type='checkbox' name={t.name} value={t.name} onChange={handleCheck} className='form_checks' ></input>
               </div>
             )
           }
