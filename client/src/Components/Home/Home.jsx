@@ -60,8 +60,9 @@ export default function Home() {
       dispatch(getTypes())
     }
     dispatch(sortByType(e.target.value))
-    setOrder(e.target.value)
+    paginado(1)
     console.log(allPokemons)
+    setOrder(e.target.value)
   }
   let types = useSelector((state) => state.types)
 
