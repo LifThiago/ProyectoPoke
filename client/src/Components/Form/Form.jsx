@@ -60,7 +60,19 @@ export default function Form() {
     console.log(input)
   }
 
-  
+  // function handleSelect(e){
+  //     setInput({
+  //       ...input,
+  //       type: [...input.type, e.target.value]
+  //     })
+  //     setErrors(
+  //       validateForm({
+  //         ...input,
+  //         type: [...input.type, e.target.value]
+  //       })
+  //     ) 
+  // }
+
   function handleCheck(e){
     let checked = e.target.checked
     if(checked){
