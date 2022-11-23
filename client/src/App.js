@@ -5,6 +5,7 @@ import { Link, Route, Switch } from 'react-router-dom'
 import Detail from './Components/Detail/Detail';
 import Searchbar from './Components/Searchbar/Searchbar';
 import Landing from './Components/Landing/Landing';
+import Game from './Components/Game/Game';
 
 function App() {
   return (
@@ -24,6 +25,8 @@ function App() {
     </Route>
 
     <Route path='/detail/:id' component={Detail} ></Route> 
+
+    <Route path='/game' ><Game /></Route>
 
     </div>
   );
