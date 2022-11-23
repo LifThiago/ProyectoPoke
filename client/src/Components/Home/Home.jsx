@@ -72,8 +72,11 @@ export default function Home() {
       {/* <img src={pokemonMap} className='home_bg' /> */}
       <br/>
     <div className='home_functions'>
-
-      <Link to='/create' className='home_link'><h5 className='home_create' >CREATE POKEMON</h5></Link>
+      
+      <div className="home_big">
+        <Link to='/create' className='home_link'><h5 className='home_create' >CREATE POKEMON</h5></Link>
+        <Link to='/game' className='home_link' ><h5 className='home_create' >PLAY</h5></Link>
+      </div>
 
     <div className="home_options">
       <div className='options'>
